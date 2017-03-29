@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/lv_fragment_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:dividerHeight="10dp"
+        android:divider="@android:color/transparent"
+        android:text="text Fragment"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_comment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#fff"
+        android:visibility="gone"
+        android:layout_gravity="bottom">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#888" />
+
+        <TextView
+            android:id="@+id/hide_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hide_down"
+            android:textSize="13sp"
+            android:textColor="#777"
+            android:drawableBottom="@drawable/like"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#666"
+            android:layout_toRightOf="@id/hide_down"
+            android:layout_marginLeft="10dp"/>
+        <EditText
+            android:id="@+id/comment_content"
+            android:hint="comment_content"
+            android:textSize="15sp"
+            android:singleLine="true"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:layout_toRightOf="@id/hide_down"
+            android:layout_marginLeft="20dp"/>
+
+        <Button
+            android:id="@+id/comment_send"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_margin="5dp"
+            android:text="send"
+            android:textSize="13sp"
+            android:textColor="#fff"
+            android:background="#888"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="15dp"/>
+    </RelativeLayout>
+
+</FrameLayout>
