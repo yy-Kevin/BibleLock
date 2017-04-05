@@ -8,6 +8,15 @@ public class Comment {
 
     String name; //评论者
     String content; //评论内容
+    String time; //发布时间
+
+    public String getTime() {
+        return "2017-3-31 2:52:21";
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public Comment(){
 

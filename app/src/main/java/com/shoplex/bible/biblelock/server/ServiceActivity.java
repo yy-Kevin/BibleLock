@@ -38,7 +38,6 @@ public class ServiceActivity extends Service {
         @SuppressWarnings("deprecation")
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.i(TAG,"yuyao 0000"  );
 
             if (intent.getAction() == Intent.ACTION_SCREEN_OFF) {
                 Log.i(TAG,"yuyao 111"  );

@@ -1,6 +1,7 @@
 package com.shoplex.bible.biblelock;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -9,6 +10,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.shoplex.bible.biblelock.databinding.ActivityLockBinding;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,6 +27,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 public class LockScreenActivity extends SwipeBackActivity {
 
     private static final String TAG = "LockScreenActivity";
+    private ActivityLockBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,18 +39,19 @@ public class LockScreenActivity extends SwipeBackActivity {
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_lock);
+//        binding = DataBindingUtil.setContentView(LockScreenActivity.this, R.layout.activity_lock);
         getSwipeBackLayout().setSwipeMode(SwipeBackLayout.FULL_SCREEN_LEFT);
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日   HH:mm:ss");
         Date curDate = new Date(System.currentTimeMillis());
         String str = formatter.format(curDate);
+
+//        String str1 = formatDataForDisplay("2001.12.12-08:23:21");
         Log.i(TAG,"yuyao str = " + str );
+//        Log.i(TAG,"yuyao str1 = " + str1 );
 
     }
-
-
-
 
 
 

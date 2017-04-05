@@ -1,152 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
-    android:background="#fff"
-    android:elevation="2dp"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-
-        <ImageView
-            android:id="@+id/iv_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/share" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/iv_image"
-            android:text="ssss" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="bbbbb" />
-
-    </RelativeLayout>
-
-    <TextView
-        android:paddingLeft="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="hahaahahah" />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:elevation="2dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:drawableLeft="@drawable/comment"
-            android:drawablePadding="4dp"
-            android:gravity="center"
-            android:text="20" />
         <RelativeLayout
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
-            <TextView
-                android:id="@+id/animation"
+
+            <ImageView
+                android:id="@+id/iv_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="+1"
-                android:textColor="#FF0000"
-                android:textSize="26dip"
-                android:visibility="gone" />
+                android:background="@drawable/share" />
 
             <TextView
-                android:id="@+id/tv_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/like"
-                android:drawablePadding="4dp"
-                android:gravity="center"
-                android:text="203" />
+                android:layout_toRightOf="@id/iv_image"
+                android:text="ssss" />
 
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="bbbbb" />
 
         </RelativeLayout>
 
-
-
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingLeft="10dp"
+            android:text="hahaahahah" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:drawableLeft="@drawable/share"
-            android:drawablePadding="4dp"
-            android:gravity="center"
-            android:text="303" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/comment"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="20" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/animation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="+1"
+                    android:textColor="#FF0000"
+                    android:textSize="26dip"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/like"
+                    android:drawablePadding="4dp"
+                    android:gravity="center"
+                    android:text="203" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/share"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="303" />
+        </LinearLayout>
     </LinearLayout>
-
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/rl_comment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:background="#fff"-->
-        <!--android:visibility="visible"-->
-        <!--android:layout_alignParentBottom="true">-->
-
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:background="#888" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/hide_down"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="hide_down"-->
-            <!--android:textSize="13sp"-->
-            <!--android:textColor="#777"-->
-            <!--android:drawablePadding="10dp"-->
-            <!--android:drawableBottom="@drawable/like"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginLeft="10dp"/>-->
-        <!--<View-->
-            <!--android:layout_width="1dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="#666"-->
-            <!--android:layout_toRightOf="@id/hide_down"-->
-            <!--android:layout_marginLeft="10dp"/>-->
-        <!--<EditText-->
-            <!--android:id="@+id/comment_content"-->
-            <!--android:hint="comment_content"-->
-            <!--android:textSize="15sp"-->
-            <!--android:singleLine="true"-->
-            <!--android:layout_width="240dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@null"-->
-            <!--android:layout_toRightOf="@id/hide_down"-->
-            <!--android:layout_marginLeft="20dp"/>-->
-
-        <!--<Button-->
-            <!--android:id="@+id/comment_send"-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="35dp"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:text="send"-->
-            <!--android:textSize="13sp"-->
-            <!--android:textColor="#fff"-->
-            <!--android:background="#888"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_marginLeft="15dp"/>-->
-    <!--</RelativeLayout>-->
-
-</LinearLayout>
+</FrameLayout>
+</layout>
