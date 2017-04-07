@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="360dp"
-    android:background="#fff"
+    android:background="@drawable/shape_corner"
     android:elevation="2dp"
     android:orientation="vertical">
 
@@ -28,6 +28,7 @@
             android:text="ssss" />
 
         <TextView
+            android:id="@+id/tv_image_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -39,55 +40,58 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="320dp"
+            android:layout_height="400dp"
             android:background="@drawable/photo"
             android:padding="10dp" />
 
         <ViewFlipper
             android:id="@+id/vf_viewfilpper"
-            android:layout_alignParentBottom="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:padding="10dp" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center_vertical"
+        android:layout_height="50dp"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/comment"
             android:drawablePadding="4dp"
-            android:gravity="center"
             android:text="20" />
 
         <TextView
+            android:id="@+id/tv_image_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/like"
             android:drawablePadding="4dp"
-            android:gravity="center"
             android:text="203" />
 
 
         <TextView
+            android:id="@+id/tv_image_share"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/share"
             android:drawablePadding="4dp"
-            android:gravity="center"
             android:text="303" />
     </LinearLayout>
+
 </LinearLayout>

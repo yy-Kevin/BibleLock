@@ -1,6 +1,9 @@
 package com.shoplex.bible.biblelock.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,14 +13,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+import com.shoplex.bible.biblelock.ImageCommentActivity;
 import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.adapter.ImageFragmentAdapter;
 import com.shoplex.bible.biblelock.bean.BibleData;
+import com.shoplex.bible.biblelock.bean.Comment;
 
 import java.util.ArrayList;
 
@@ -28,33 +41,44 @@ import java.util.ArrayList;
 public class ImageFragment extends Fragment {
 
     public static final String TAG ="ImageFragment" ;
-
-    private LinearLayout ll_fragment_image;
-    private ImageView iv_fragment_image;
-    private TextView tv_fragment_image;
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            Log.i(TAG,"yuyao = " + msg);
-        }
-    };
     private ListView lv_fragment_image;
     private SwipeRefreshLayout mSwipeRefresh;
+    private ImageFragmentAdapter textAdapter;
+    private Activity mActivity;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
+        Log.i(TAG,"yuyao onCreateView");
         View view = View.inflate(getContext(), R.layout.fragment_image, null);
         lv_fragment_image = (ListView) view.findViewById(R.id.lv_fragment_image);
         mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.id_swipe_ly);
-        ArrayList<BibleData> arrayList = new ArrayList();
-        arrayList.add(new BibleData());
-        arrayList.add(new BibleData());
-        arrayList.add(new BibleData());
-        ImageFragmentAdapter textAdapter = new ImageFragmentAdapter(getContext(),arrayList);
-        lv_fragment_image.setAdapter(textAdapter);
+        mActivity = getActivity();
+        return view;
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
+        Log.i(TAG,"yuyao onActivityCreated");
+        ArrayList<Comment> arrayList = new ArrayList();
+        arrayList.add(new Comment());
+        arrayList.add(new Comment());
+        arrayList.add(new Comment());
+
+        textAdapter = new ImageFragmentAdapter(getContext(),arrayList);
+        lv_fragment_image.setAdapter(textAdapter);
+        lv_fragment_image.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position%2 == 0){
+                    Intent intent = new Intent(mActivity, ImageCommentActivity.class);
+                    intent.putExtra("",position);
+                    mActivity.startActivityForResult(intent,1);
+                }
+            }
+        });
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -69,34 +93,8 @@ public class ImageFragment extends Fragment {
                 }, 3000);
             }
         });
-//        ll_fragment_image = (LinearLayout) view.findViewById(R.id.ll_fragment_image);
-//        iv_fragment_image = (ImageView) view.findViewById(R.id.iv_fragment_image);
-//        tv_fragment_image = (TextView) view.findViewById(R.id.tv_fragment_image);
-//
-//        ll_fragment_image.setTranslationY(100);
-//        int i = 0;
-//
-//        mHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Message message = mHandler.obtainMessage();
-//                message.what = 0;
-//                mHandler.sendMessage(message);
-//            }
-//        }, 1000);
-//
-//        AlphaAnimation aa = new AlphaAnimation(1.0f, 0.0f);
-//        aa.setDuration(1500);
-////        aa.setRepeatCount(5);
-//        ll_fragment_image.startAnimation(aa);
-//        TranslateAnimation animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, -150.0f);
-//        animation.setDuration(1500);
-////        animation.setRepeatCount(Integer.MAX_VALUE);
-//
-//        tv_fragment_image.setText("sdasdfasdfasa +" + i++);
-//        ll_fragment_image.startAnimation(animation);
 
-        return view;
-
+        super.onActivityCreated(savedInstanceState);
     }
 }
+

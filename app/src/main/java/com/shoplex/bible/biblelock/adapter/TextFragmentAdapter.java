@@ -33,17 +33,25 @@ import java.util.Date;
  * Created by qsk on 2017/3/28.
  */
 
-public class TextFragmentAdapter extends BaseAdapter implements View.OnClickListener{
+public class TextFragmentAdapter extends BaseAdapter {
 
     private static final String TAG = "TextFragmentAdapter";
     private ArrayList<Comment> mList;
     private Context mContext;
     private TextHolder holder;
-    private RelativeLayout mComment;
-    public TextFragmentAdapter(Context context, ArrayList<Comment> list,RelativeLayout button){
+    private onClickListener listener;
+
+    public TextFragmentAdapter(Context context, ArrayList<Comment> list) {
         mList = list;
         mContext = context;
-        mComment = button;
+    }
+
+    public interface onClickListener {
+        void onItemClick(int postition);
+    }
+
+    public void setOnclicListener(onClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -62,97 +70,61 @@ public class TextFragmentAdapter extends BaseAdapter implements View.OnClickList
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null){
-            convertView = View.inflate(mContext, R.layout.fragment_text_item,null);
-//            ViewDataBinding convertView1 = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.fragment_text_item, parent, false);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = View.inflate(mContext, R.layout.fragment_text_item, null);
             holder = new TextHolder();
             holder.commentText = (TextView) convertView.findViewById(R.id.tv_comment);
             holder.tv_like = (TextView) convertView.findViewById(R.id.tv_like);
             holder.animation = (TextView) convertView.findViewById(R.id.animation);
             holder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
-//            holder.hide_down = (TextView) convertView.findViewById(R.id.hide_down);
-//            holder.rl_comment = (RelativeLayout) convertView.findViewById(R.id.rl_comment);
-//            holder.comment_content = (EditText) convertView.findViewById(R.id.comment_content);
-//            holder.comment_send = (Button) convertView.findViewById(R.id.comment_send);
-
             convertView.setTag(holder);
-
-        }else {
+        } else {
             holder = (TextHolder) convertView.getTag();
         }
 
-        holder.commentText.setOnClickListener(this);
-        holder.tv_like.setOnClickListener(this);
+        holder.commentText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(position);
 
-        String time  = formatDataForDisplay(mList.get(position).getTime());
+                }
+            }
+        });
+
+        String time = formatDataForDisplay(mList.get(position).getTime());
         holder.tv_time.setText(time);
-
-//        holder.hide_down.setOnClickListener(this);
-//        holder.comment_send.setOnClickListener(this);
-
-
         return convertView;
     }
 
-    /**
-     * 添加一条评论,刷新列表
-     * @param comment
-     */
-    public void addComment(Comment comment){
-        mList.add(comment);
-        notifyDataSetChanged();
-    }
+//    @Override
+//    public void onClick(View v) {
+//        Log.i(TAG,"yuyao v = " +v);
+//
+//        switch (v.getId()) {
+//            case R.id.tv_comment:
+//                if(listener)
+//                mComment.setVisibility(View.VISIBLE);
+//                // 弹出输入法
+//                InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+//                break;
+//        }
+//    }
 
-    @Override
-    public void onClick(View v) {
-        Log.i(TAG,"yuyao v = " +v);
-
-        switch (v.getId()) {
-            case R.id.tv_comment:
-                mComment.setVisibility(View.VISIBLE);
-//                editText.requestFocus();
-                // 弹出输入法
-                InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                break;
-        }
-    }
-
-    private class TextHolder{
+    private class TextHolder {
         TextView commentText;
         TextView tv_like;
         TextView animation;
         TextView tv_time;
-        TextView hide_down;
-        RelativeLayout rl_comment;
-        EditText comment_content;
-        Button comment_send;
-    }
-
-    /**
-     * 发送评论
-     */
-    public void sendComment(){
-        if(holder.comment_content.getText().toString().equals("")){
-            Toast.makeText(mContext, "评论不能为空！", Toast.LENGTH_SHORT).show();
-        }else{
-            // 生成评论数据
-            Comment comment = new Comment();
-            comment.setName("评论者"+(mList.size()+1)+"：");
-            comment.setContent(holder.comment_content.getText().toString());
-            this.addComment(comment);
-            // 发送完，清空输入框
-            holder.comment_content.setText("");
-            Toast.makeText(mContext, "评论成功！", Toast.LENGTH_SHORT).show();
-        }
     }
 
     public static String formatDataForDisplay(String strData) {
         Date date = new Date();
 
         Calendar date1 = Calendar.getInstance();
-        date1.get(Calendar.HOUR_OF_DAY   );//得到24小时机制的
+        date1.get(Calendar.HOUR_OF_DAY);//得到24小时机制的
 //        date.get(Calendar.HOUR);//   得到12小时机制的
         // 转换为标准时间
         SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

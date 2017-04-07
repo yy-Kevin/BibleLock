@@ -13,6 +13,7 @@
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:dividerHeight="10dp"
+            android:background="#22ffffff"
             android:divider="@android:color/transparent"
             android:id="@+id/lv_fragment_image"
             android:layout_width="match_parent"

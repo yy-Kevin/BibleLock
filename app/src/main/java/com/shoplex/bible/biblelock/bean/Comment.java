@@ -6,12 +6,42 @@ package com.shoplex.bible.biblelock.bean;
 
 public class Comment {
 
-    String name; //评论者
-    String content; //评论内容
-    String time; //发布时间
+    private String name; //评论者
+    private String content; //评论内容
+    private String time; //发布时间
+    private int like;
+    private int share;
+    private int comment;
+
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public int getShare() {
+        return share;
+    }
+
+    public void setShare(int share) {
+        this.share = share;
+    }
+
+    public int getComment() {
+        return comment;
+    }
+
+    public void setComment(int comment) {
+        this.comment = comment;
+    }
+
+
 
     public String getTime() {
-        return "2017-3-31 2:52:21";
+        return "2017-4-7 1:50:21";
     }
 
     public void setTime(String time) {

@@ -8,10 +8,10 @@
     android:background="@android:color/transparent"
     tools:context="com.shoplex.bible.biblelock.MainActivity">
 
-    <TextView
+    <com.shoplex.bible.biblelock.viewpager.LockViewPager
+        android:id="@+id/vp_viewpager_lock"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="锁屏界面"
         android:gravity="center" />
 
 

@@ -1,55 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawerlayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/shading"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#addd"
-    android:orientation="vertical"
+    android:layout_height="match_parent">
 
-    tools:context="com.shoplex.bible.biblelock.MainActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:clipToPadding="true"
-        android:fitsSystemWindows="true"
-        app:title="bible"
-        app:titleTextColor="#999"></android.support.v7.widget.Toolbar>
-
-    <LinearLayout
-        android:id="@+id/ll_button_select"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-
-        <Button
-            android:id="@+id/btv_image"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_image"
-            android:text="IMAGE" />
-
-        <Button
-            android:id="@+id/btv_text"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_text"
-            android:text="TEXT" />
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/fl_content"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_button_select"
-        android:paddingTop="20dp">
+        android:orientation="vertical"
+        tools:context="com.shoplex.bible.biblelock.MainActivity">
 
-    </FrameLayout>
-</RelativeLayout>
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_button_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/include"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
+
+            <Button
+                android:id="@+id/btv_image"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_select"
+                android:text="IMAGE" />
+
+            <Button
+                android:id="@+id/btv_text"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_button_select"
+                android:text="TEXT" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:background="#22ffffff"
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_button_select"
+            android:paddingTop="10dp">
+
+        </FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="#a999"
+        android:fitsSystemWindows="true">
+
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>
