@@ -4,11 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.shoplex.wuxiamagic.ui.bookdetail.BookDetailActivity">
 
-
     <item
         android:id="@+id/action_setting"
-        android:orderInCategory="100"
         android:icon="@drawable/qq"
-        android:title="@string/action_settings"
-        app:showAsAction="always"/>
+        android:orderInCategory="100"
+        android:title="Rate Us"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_setting12"
+        android:icon="@drawable/qq"
+        android:orderInCategory="100"
+        android:title="FeedBack"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_setting13"
+        android:icon="@drawable/qq"
+        android:orderInCategory="100"
+        android:title="Settings"
+        app:showAsAction="never" />
 </menu>

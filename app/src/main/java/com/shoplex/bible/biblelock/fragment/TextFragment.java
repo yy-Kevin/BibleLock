@@ -112,6 +112,9 @@ public class TextFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Intent intent = new Intent(mActivity, TextCommentActivity.class);
+                intent.putExtra("postition" ,position);
+                mActivity.startActivityForResult(intent,0);
             }
         });
 

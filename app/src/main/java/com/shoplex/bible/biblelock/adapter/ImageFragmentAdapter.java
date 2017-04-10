@@ -2,6 +2,7 @@ package com.shoplex.bible.biblelock.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +19,12 @@ import com.facebook.FacebookSdk;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.shoplex.bible.biblelock.MainActivity;
 import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.bean.BibleData;
 import com.shoplex.bible.biblelock.bean.Comment;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,7 +36,7 @@ import java.util.List;
  * Created by qsk on 2017/3/28.
  */
 
-public class ImageFragmentAdapter extends BaseAdapter {
+public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickListener {
 
     private static final String TAG = "ImageFragmentAdapter";
     private ArrayList<Comment> mList;
@@ -92,6 +95,7 @@ public class ImageFragmentAdapter extends BaseAdapter {
                     iHolder = new ImageHolder();
                     iHolder.vf_viewfilpper = (ViewFlipper) view.findViewById(R.id.vf_viewfilpper);
                     iHolder.tv_image_share = (TextView) view.findViewById(R.id.tv_image_share);
+                    iHolder.tv_image_like = (TextView) view.findViewById(R.id.tv_image_like);
                     iHolder.tv_image_time = (TextView) view.findViewById(R.id.tv_image_time);
                     view.setTag(iHolder);
                 } else {
@@ -113,12 +117,8 @@ public class ImageFragmentAdapter extends BaseAdapter {
                 iHolder.vf_viewfilpper.setOutAnimation(mContext, R.anim.push_up_out);
                 iHolder.vf_viewfilpper.startFlipping();
 
-                iHolder.tv_image_share.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.i(TAG,"yuyao ffff");
-                    }
-                });
+                iHolder.tv_image_share.setOnClickListener(this);
+                iHolder.tv_image_like.setOnClickListener(this);
                 break;
             case TYPE_TITLE:
                 view  = View.inflate(mContext, R.layout.fragment_title_item,null);
@@ -138,10 +138,24 @@ public class ImageFragmentAdapter extends BaseAdapter {
         return list;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_image_like:
+                Log.i(TAG,"like like");
+                break;
+            case R.id.tv_image_share:
+                Log.i(TAG,"share share");
+                shareMsg(mContext, "MainAcitvity" ,"快使用我们把","我们是最好的的",null);
+                break;
+        }
+    }
+
     private class ImageHolder{
         ViewFlipper vf_viewfilpper;
         TextView tv_image_time;
         TextView tv_image_share;
+        TextView tv_image_like;
     }
 
     public static String formatDataForDisplay(String strData) {
@@ -184,6 +198,33 @@ public class ImageFragmentAdapter extends BaseAdapter {
             return formatter.format(issueDate);
         }
         return "";
+    }
+
+    /**
+     * 分享功能
+     * @param mContext
+     * @param activityTitle
+     * @param msgTitle
+     * @param msgText
+     * @param imgPath
+     */
+    public void shareMsg(Context mContext, String activityTitle, String msgTitle, String msgText,
+                         String imgPath) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        if (imgPath == null || imgPath.equals("")) {
+            intent.setType("text/plain"); // 纯文本
+        } else {
+            File f = new File(imgPath);
+            if (f != null && f.exists() && f.isFile()) {
+                intent.setType("image/jpg");
+                Uri u = Uri.fromFile(f);
+                intent.putExtra(Intent.EXTRA_STREAM, u);
+            }
+        }
+        intent.putExtra(Intent.EXTRA_SUBJECT, msgTitle);
+        intent.putExtra(Intent.EXTRA_TEXT, msgText);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.mContext.startActivity(Intent.createChooser(intent, activityTitle));
     }
 }
 

@@ -3,10 +3,10 @@
     android:id="@+id/ll_linearlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/shading">
+    android:background="@drawable/shading"
+    android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar_image" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -132,17 +132,34 @@
             <LinearLayout
                 android:id="@+id/lv_comment_image"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             </LinearLayout>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="add comment"/>
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_select"
+                    android:hint="add comment"
+                    android:paddingBottom="10dp" />
+
+                <ImageButton
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/like"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
         </LinearLayout>
 
-
     </ScrollView>
+
 </LinearLayout>

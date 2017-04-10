@@ -53,13 +53,12 @@ public class ImageCommentActivity extends AppCompatActivity implements View.OnCl
 //        listview.setAdapter(new CommentAdapter());
 
 //        linearlayout.addView();
-        Toolbar toolbar = (Toolbar) this.findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) this.findViewById(R.id.toolbar_image);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-
         //设置ToolBar,使ToolBar生效
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("");
+
     }
 
     @Override
@@ -71,7 +70,9 @@ public class ImageCommentActivity extends AppCompatActivity implements View.OnCl
                 Log.i(TAG,"YUYAO ");
                 InputMethodManager imm = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(ll_linearlayout.getWindowToken(), 0);
+                if (imm != null && ll_linearlayout != null){
+                    imm.hideSoftInputFromWindow(ll_linearlayout.getWindowToken(), 0);
+                }
                 finish();
                 break;
         }

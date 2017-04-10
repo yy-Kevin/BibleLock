@@ -1,28 +1,19 @@
 package com.shoplex.bible.biblelock.adapter;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.os.Handler;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shoplex.bible.biblelock.R;
-import com.shoplex.bible.biblelock.bean.BibleData;
+import com.shoplex.bible.biblelock.TextCommentActivity;
 import com.shoplex.bible.biblelock.bean.Comment;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,13 +24,14 @@ import java.util.Date;
  * Created by qsk on 2017/3/28.
  */
 
-public class TextFragmentAdapter extends BaseAdapter {
+public class TextFragmentAdapter extends BaseAdapter implements View.OnClickListener {
 
     private static final String TAG = "TextFragmentAdapter";
     private ArrayList<Comment> mList;
     private Context mContext;
     private TextHolder holder;
     private onClickListener listener;
+    private boolean isLike = false;
 
     public TextFragmentAdapter(Context context, ArrayList<Comment> list) {
         mList = list;
@@ -74,16 +66,19 @@ public class TextFragmentAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.fragment_text_item, null);
             holder = new TextHolder();
-            holder.commentText = (TextView) convertView.findViewById(R.id.tv_comment);
-            holder.tv_like = (TextView) convertView.findViewById(R.id.tv_like);
+
+            holder.tv_text_like = (TextView) convertView.findViewById(R.id.tv_text_like);
+            holder.tv_text_comment = (TextView) convertView.findViewById(R.id.tv_text_comment);
             holder.animation = (TextView) convertView.findViewById(R.id.animation);
+            holder.tv_text_share = (TextView) convertView.findViewById(R.id.tv_text_share);
             holder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
             convertView.setTag(holder);
         } else {
             holder = (TextHolder) convertView.getTag();
         }
 
-        holder.commentText.setOnClickListener(new View.OnClickListener() {
+
+        holder.tv_text_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
@@ -93,31 +88,22 @@ public class TextFragmentAdapter extends BaseAdapter {
             }
         });
 
+        holder.tv_text_like.setOnClickListener(this);
+        holder.tv_text_share.setOnClickListener(this);
+        holder.tv_text_like.setSelected(isLike);
+
         String time = formatDataForDisplay(mList.get(position).getTime());
         holder.tv_time.setText(time);
         return convertView;
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        Log.i(TAG,"yuyao v = " +v);
-//
-//        switch (v.getId()) {
-//            case R.id.tv_comment:
-//                if(listener)
-//                mComment.setVisibility(View.VISIBLE);
-//                // 弹出输入法
-//                InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-//                break;
-//        }
-//    }
 
     private class TextHolder {
-        TextView commentText;
-        TextView tv_like;
         TextView animation;
         TextView tv_time;
+        TextView tv_text_like;
+        TextView tv_text_share;
+        TextView tv_text_comment;
     }
 
     public static String formatDataForDisplay(String strData) {
@@ -160,5 +146,61 @@ public class TextFragmentAdapter extends BaseAdapter {
             return formatter.format(issueDate);
         }
         return "";
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_text_comment:
+                Log.i(TAG,"tv_text_comment");
+
+                break;
+            case R.id.tv_text_like:
+                selectLike(v,isLike);
+                if (isLike){
+                    isLike = false;
+                }else {
+                    isLike = true;
+                }
+                Log.i(TAG,"like like");
+                break;
+            case R.id.tv_text_share:
+                Log.i(TAG,"share share");
+                shareMsg(mContext, "MainAcitvity" ,"快使用我们把","我们是最好的的",null);
+                break;
+        }
+    }
+
+    public void selectLike(View v,boolean b){
+
+        v.setSelected(!b);
+
+    }
+
+    /**
+     * 分享功能
+     * @param context
+     * @param activityTitle
+     * @param msgTitle
+     * @param msgText
+     * @param imgPath
+     */
+    public void shareMsg(Context context, String activityTitle, String msgTitle, String msgText,
+                         String imgPath) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        if (imgPath == null || imgPath.equals("")) {
+            intent.setType("text/plain"); // 纯文本
+        } else {
+            File f = new File(imgPath);
+            if (f != null && f.exists() && f.isFile()) {
+                intent.setType("image/jpg");
+                Uri u = Uri.fromFile(f);
+                intent.putExtra(Intent.EXTRA_STREAM, u);
+            }
+        }
+        intent.putExtra(Intent.EXTRA_SUBJECT, msgTitle);
+        intent.putExtra(Intent.EXTRA_TEXT, msgText);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(Intent.createChooser(intent, activityTitle));
     }
 }

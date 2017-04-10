@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.Toolbar
+
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,12 +15,20 @@
         android:fitsSystemWindows="true"
         app:titleTextColor="#999">
 
+        <ImageButton
+            android:layout_gravity="left"
+            android:id="@+id/ib_toolbar"
+            android:background="@drawable/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <TextView
-            android:text="Bible"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textColor="#222"
+            android:text="Bible" />
     </android.support.v7.widget.Toolbar>
 
 </RelativeLayout>
