@@ -1,26 +1,21 @@
 package com.shoplex.bible.biblelock;
 
-import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.shoplex.bible.biblelock.databinding.ActivityLockBinding;
-import com.shoplex.bible.biblelock.viewpager.LockScreenViewPager0;
-import com.shoplex.bible.biblelock.viewpager.LockScreenViewpager;
-import com.shoplex.bible.biblelock.viewpager.LockScreenViewpager1;
-import com.shoplex.bible.biblelock.viewpager.LockScreenViewpager3;
-import com.shoplex.bible.biblelock.viewpager.LockScreenViewpager4;
+import com.shoplex.bible.biblelock.viewpager.BaseLockScreenViewPager;
+import com.shoplex.bible.biblelock.viewpager.FirstLockScreenViewPager;
+import com.shoplex.bible.biblelock.viewpager.LockViewPager;
+import com.shoplex.bible.biblelock.viewpager.SecondLockScreenViewpager;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,9 +31,9 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 public class LockScreenActivity extends SwipeBackActivity {
 
     private static final String TAG = "LockScreenActivity";
-    private ActivityLockBinding binding;
-    private ViewPager viewPager;
-    private ArrayList<LockScreenViewPager0> arrayList;
+
+    private LockViewPager viewPager;
+    private ArrayList<BaseLockScreenViewPager> arrayList;
     public static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,12 +43,14 @@ public class LockScreenActivity extends SwipeBackActivity {
                 WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
                         | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         this.getWindow().setFlags(FLAG_HOMEKEY_DISPATCHED, FLAG_HOMEKEY_DISPATCHED);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_lock);
+
         getSwipeBackLayout().setSwipeMode(SwipeBackLayout.FULL_SCREEN_LEFT);
 //        getSwipeBackLayout().setEdgeTrackingEnabled(SwipeBackLayout.FULL_SCREEN_LEFT);
 //        getSwipeBackLayout().setSwipeMode(SwipeBackLayout.EDGE_ALL);
 
-        viewPager = (ViewPager) findViewById(R.id.vp_viewpager_lock);
+        viewPager = (LockViewPager) findViewById(R.id.vp_viewpager_lock);
         initData();
         viewPager.setAdapter(new LockScreenAdapter());
 
@@ -70,10 +67,9 @@ public class LockScreenActivity extends SwipeBackActivity {
     private void initData(){
 
         arrayList = new ArrayList();
-        arrayList.add(new LockScreenViewpager1(this));
-        arrayList.add(new LockScreenViewpager(this));
-        arrayList.add(new LockScreenViewpager3(this));
-        arrayList.add(new LockScreenViewpager4(this));
+        arrayList.add(new FirstLockScreenViewPager(this));
+        arrayList.add(new SecondLockScreenViewpager(this));
+
 
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -96,6 +92,12 @@ public class LockScreenActivity extends SwipeBackActivity {
 
     @Override
     public void onBackPressed() {
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.i(TAG," yuyao onTouchEvent");
+        return super.onTouchEvent(event);
     }
 
     @Override
@@ -128,8 +130,10 @@ public class LockScreenActivity extends SwipeBackActivity {
         public Object instantiateItem(ViewGroup container, int position) {
 
 
-            LockScreenViewPager0 view = arrayList.get(position);
+            BaseLockScreenViewPager view = arrayList.get(position);
+
             View rootView = view.initView();
+            view.initFragment();
             container.addView(rootView);
             Log.i(TAG,"yuyao instantiateitem");
             return rootView;

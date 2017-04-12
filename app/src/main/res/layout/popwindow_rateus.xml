@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:elevation="2dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="#fff">
+
+
+
+    <RatingBar
+        android:layout_gravity="center"
+        android:id="@+id/ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="1" />
+    
+    <TextView
+        android:layout_marginTop="6dp"
+        android:textSize="16dp"
+        android:text="Do you really like us? "
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="8dp"
+        android:singleLine="true"
+        android:textSize="16dp"
+        android:text="please give five points, we will try to do better!"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:ellipsize="marquee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

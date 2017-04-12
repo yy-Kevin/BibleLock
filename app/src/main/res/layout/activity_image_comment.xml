@@ -74,6 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
+                        android:background="@drawable/cicle"
                         android:padding="10dp" />
                 </RelativeLayout>
 
@@ -138,24 +139,40 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_gravity="center"
-                android:layout_width="360dp"
-                android:layout_height="wrap_content">
+                android:id="@+id/rl_comment"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|center"
+                android:background="#796033">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:background="#666" />
 
                 <EditText
-                    android:layout_width="360dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edit_select"
-                    android:hint="add comment"
-                    android:paddingBottom="10dp" />
+                    android:id="@+id/comment_content"
+                    android:layout_width="240dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@null"
 
-                <ImageButton
+                    android:hint="comment_content"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/comment_send"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="4dp"
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/like"
-                    android:background="@android:color/transparent"
-                    android:layout_height="wrap_content" />
+                    android:layout_margin="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#796033"
+                    android:text="send"
+                    android:textColor="#fff"
+                    android:textSize="13sp" />
             </RelativeLayout>
 
         </LinearLayout>

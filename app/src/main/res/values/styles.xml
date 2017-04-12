@@ -12,7 +12,7 @@
 
         <item name="colorPrimary">#4A0958</item>
         <item name="colorPrimaryDark">#4A0958</item>
-
+        <item name="colorAccent">#94805c</item>
     </style>
 
     <!--  这个是加入的代码 -->

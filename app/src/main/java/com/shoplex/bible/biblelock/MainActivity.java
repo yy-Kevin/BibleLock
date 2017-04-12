@@ -4,21 +4,11 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ImageFormat;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -28,35 +18,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.share.Sharer;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
 import com.shoplex.bible.biblelock.fragment.DrawerFragment;
 import com.shoplex.bible.biblelock.fragment.ImageFragment;
 import com.shoplex.bible.biblelock.fragment.TextFragment;
-import com.shoplex.bible.biblelock.server.ServiceActivity;
-import com.shoplex.bible.biblelock.utils.FaceBookShareUtils;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -76,12 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         initView();
         if (savedInstanceState == null) {
             initFragment();
         }
-        Intent intent = new Intent(this,ServiceActivity.class);
-        startService(intent);
+
 
         btv_image.setOnClickListener(this);
         btv_text.setOnClickListener(this);
@@ -196,26 +173,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        item.getItemId();
-        int titleId = Resources.getSystem().getIdentifier("action_bar_title", "16908332", "android");
-        Log.i(TAG,"item.getItemId() +" + titleId);
         switch (item.getItemId()){
-            case android.R.id.home:
-                View view = findViewById(item.getItemId());
+            case R.id.action_setting:
+                showPopwindow(R.layout.popwindow_rateus,Gravity.CENTER);
+                break;
 
-//                Animation operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate);
+            case R.id.action_setting12:
 
-//                (View)toolbar.getNavigationIcon()).setAnimation(operatingAnim);
+                break;
 
-
-//                view.setAnimation(R.anim.rotate);
-//                View pop = LayoutInflater.from(this).inflate(R.layout.popwindow, null);
-//                PopupWindow popWindow = new PopupWindow(pop, LinearLayout.LayoutParams.WRAP_CONTENT, 200);
-//                popWindow.setOutsideTouchable(true);
-//                popWindow.setBackgroundDrawable(new BitmapDrawable());
-//                popWindow.setFocusable(true);
-////                popWindow.showAsDropDown(item.getItemId());
-//                popWindow.showAtLocation(btv_image, Gravity.TOP,100,100);
+            case R.id.action_setting13:
+                Intent intent = new Intent(this,SettingActivity.class);
+                startActivity(intent);
                 break;
         }
         return true;
@@ -259,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void exitBy2Click() {
         if (!isExit) {
             isExit = true;
-            showPopwindow();
+            showPopwindow(R.layout.popwindow_exit,Gravity.BOTTOM);
         } else {
             finish();
             System.exit(0);
@@ -269,21 +238,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 显示popupWindow
      */
-    private void showPopwindow() {
+    private void showPopwindow(int layout,int gravity) {
         // 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.popwindow, null);
+        View view = inflater.inflate(layout, null);
 
         // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
 
-        PopupWindow window = new PopupWindow(view,
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT);
+        PopupWindow window = new PopupWindow(view);
+        window.setWidth(900);
+        window.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         window.setFocusable(true);
 
-
+        window.setElevation(2);
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);
@@ -293,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         window.setAnimationStyle(R.style.mypopwindow_anim_style);
         // 在底部显示
         window.showAtLocation(view,
-                Gravity.BOTTOM, 0, 0);
+                gravity, 0, 0);
 
 //        // 这里检验popWindow里的button是否可以点击
 //        Button first = (Button) view.findViewById(R.id.first);

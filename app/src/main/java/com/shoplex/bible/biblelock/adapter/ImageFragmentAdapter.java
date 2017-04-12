@@ -1,6 +1,5 @@
 package com.shoplex.bible.biblelock.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,20 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.share.Sharer;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
-import com.shoplex.bible.biblelock.MainActivity;
 import com.shoplex.bible.biblelock.R;
-import com.shoplex.bible.biblelock.bean.BibleData;
 import com.shoplex.bible.biblelock.bean.Comment;
 
 import java.io.File;
@@ -41,8 +31,6 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
     private static final String TAG = "ImageFragmentAdapter";
     private ArrayList<Comment> mList;
     private Context mContext;
-    private CallbackManager callbackManager;
-    private ShareDialog shareDialog;
     public static final int TYPE_TITLE = 0;
     public static final int TYPE_COMPANY = 1;
 
@@ -103,8 +91,7 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
                     iHolder = (ImageHolder) view.getTag();
                 }
 
-                //评论的集合
-                List<TextView> list = this.getData();
+                List<FrameLayout> list = this.getData1();
                 int size = list.size();
                 for (int i = 0; i < size; i++) {
                     iHolder.vf_viewfilpper.addView(list.get(i));
@@ -134,6 +121,18 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
             TextView tv = (TextView) new TextView(mContext);
             tv.setText("这是测试用的第 " + i + i + i + i + " 行测试数据：");
             list.add(tv);
+        }
+        return list;
+    }
+
+    private List<FrameLayout> getData1() {
+        List<FrameLayout> list = new ArrayList<FrameLayout>();
+        for (int i = 0; i < 5; i++) {
+            FrameLayout fl = (FrameLayout) new FrameLayout(mContext);
+//            tv.setText("这是测试用的第 " + i + i + i + i + " 行测试数据：");
+            View view = View.inflate(mContext,R.layout.comment_item,null);
+            fl.addView(view);
+            list.add(fl);
         }
         return list;
     }
