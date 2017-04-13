@@ -28,10 +28,7 @@ public class LockViewPager extends ViewPager {
     }
 
 
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        return super.onTouchEvent(ev);
-    }
+
 
     private boolean isCanScroll = true;
     private int position = 0;
@@ -65,8 +62,6 @@ public class LockViewPager extends ViewPager {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.i(TAG,"yuyao dis 1111 ");
-        Log.i(TAG,"yuyao dis isCanScroll  =" + isCanScroll);
-        Log.i(TAG,"yuyao dis getCurrentItem()  =" + getCurrentItem());
 
         if (getCurrentItem() == 0) {
             switch (ev.getAction()) {
@@ -77,7 +72,7 @@ public class LockViewPager extends ViewPager {
                     Log.i(TAG,"yuyao dis 2222");
 
                     float motionValue = ev.getX() - beforeX;
-                    if (motionValue < 0) {//不能禁止左滑
+                    if (motionValue < 20) {//不能禁止左滑
                         Log.i(TAG,"yuyao dis 3333");
 
                         getParent().requestDisallowInterceptTouchEvent(true);

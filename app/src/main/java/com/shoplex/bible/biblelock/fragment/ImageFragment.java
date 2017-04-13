@@ -14,12 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.shoplex.bible.biblelock.ImageCommentActivity;
 import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.adapter.ImageFragmentAdapter;
 import com.shoplex.bible.biblelock.bean.Comment;
+import com.shoplex.bible.biblelock.utils.ToastUtil;
 
 import java.util.ArrayList;
 
@@ -74,7 +74,7 @@ public class ImageFragment extends Fragment {
         fab_action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mActivity,"这是广告为值",Toast.LENGTH_LONG).show();
+                ToastUtil.showToast(mActivity,"这是广告位置");
                 fab_action.setVisibility(View.GONE);
             }
         });

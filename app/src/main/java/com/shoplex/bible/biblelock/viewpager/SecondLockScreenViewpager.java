@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.shoplex.bible.biblelock.LockScreenActivity;
 import com.shoplex.bible.biblelock.R;
-import com.shoplex.bible.biblelock.fragment.Verseragment;
+import com.shoplex.bible.biblelock.fragment.VerseFragment;
 import com.shoplex.bible.biblelock.fragment.WallpageFragment;
 
 /**
@@ -22,7 +22,7 @@ public class SecondLockScreenViewpager extends BaseLockScreenViewPager implement
     private TextView tv_wallpaper;
     private TextView tv_verse;
     private Drawable drawable;
-    private Verseragment verseragment;
+    private VerseFragment verseragment;
     private WallpageFragment wallpageFragment;
     private LockScreenActivity activity;
 
@@ -46,7 +46,7 @@ public class SecondLockScreenViewpager extends BaseLockScreenViewPager implement
 
     public void initFragment() {
 
-        verseragment = new Verseragment();
+        verseragment = new VerseFragment();
 
         activity.getFragmentManager().beginTransaction().replace(R.id.fl_lock_twopager, verseragment).commit();
     }
@@ -65,7 +65,7 @@ public class SecondLockScreenViewpager extends BaseLockScreenViewPager implement
                 tv_wallpaper.setCompoundDrawables(null, null, null, null);
 
                 if (verseragment == null) {
-                    verseragment = new Verseragment();
+                    verseragment = new VerseFragment();
                 }
                 transaction.replace(R.id.fl_lock_twopager, verseragment);
                 break;

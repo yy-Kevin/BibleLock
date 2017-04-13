@@ -14,7 +14,7 @@ import com.shoplex.bible.biblelock.R;
  * Created by qsk on 2017/3/28.
  */
 
-public class Verseragment extends Fragment {
+public class VerseFragment extends Fragment {
 
 
     private Activity mActivity;

@@ -4,12 +4,17 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shoplex.bible.biblelock.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import static com.facebook.GraphRequest.TAG;
@@ -18,11 +23,89 @@ import static com.facebook.GraphRequest.TAG;
  * Created by qsk on 2017/4/12.
  */
 
-public class FirstLockScreenViewPager extends BaseLockScreenViewPager {
+public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements View.OnClickListener {
 
 
-    private Handler handler;
-    private TextView tv_time;
+    private Handler handler = handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            String str = (String)msg.obj;
+            String[] strData = str.split(" ");
+            tv_time1.setText(strData[1]);
+
+            String wek = "";
+            String moh = "";
+            switch (msg.arg1){
+                case 0:
+                    wek = week[msg.arg1];
+                    break;
+                case 1:
+                    wek = week[msg.arg1];
+                    break;
+                case 2:
+                    wek = week[msg.arg1];
+                    break;
+                case 3:
+                    wek = week[msg.arg1];
+                    break;
+                case 4:
+                    wek = week[msg.arg1];
+                    break;
+                case 5:
+                    wek = week[msg.arg1];
+                    break;
+                case 6:
+                    wek = week[msg.arg1];
+                    break;
+            }
+            switch (msg.arg2){
+                case 0:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 1:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 2:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 3:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 4:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 5:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 6:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 7:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 8:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 9:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 10:
+                    moh = mothun[msg.arg2];
+                    break;
+                case 11:
+                    moh = mothun[msg.arg2];
+                    break;
+            }
+
+            String arg = wek + ", " + moh + " " + strData[0];
+            tv_time2.setText(arg);
+        }
+    };
+    private TextView tv_time1;
+    private String[] week = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+    private String[] mothun = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+    private TextView tv_time2;
+    private Button iv_menu;
 
     public FirstLockScreenViewPager(Activity context) {
         super(context);
@@ -31,7 +114,33 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager {
     @Override
     public View initView() {
         View view = View.inflate(mContent, R.layout.viewpager_first, null);
-        tv_time = (TextView) view.findViewById(R.id.tv_time);
+        tv_time1 = (TextView) view.findViewById(R.id.tv_time1);
+        tv_time2 = (TextView) view.findViewById(R.id.tv_time2);
+        iv_menu = (Button) view.findViewById(R.id.iv_menu);
+
+
+        ImageView tv = (ImageView) view.findViewById(R.id.iv_wifi);
+        int[] res = {R.drawable.cehua1,R.drawable.cehua3,R.drawable.cehua};
+
+        iv_menu.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.i(TAG,"yuyao onTouch setOnTouchListener");
+                ViewGroup viewGroup = (ViewGroup) v.getParent();
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_MOVE:
+                        viewGroup.requestDisallowInterceptTouchEvent(true);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        viewGroup .requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+                return  false;
+            }
+        });
+        iv_menu.setOnClickListener(this);
+
         initTime();
         return view;
     }
@@ -39,26 +148,77 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager {
 
 
     public void initTime(){
-            handler = new Handler(){
-                @Override
-                public void handleMessage(Message msg) {
-                    Log.i(TAG,"YUYAO 111 cityName = " + (String)msg.obj);
-                    tv_time.setText((String)msg.obj);
-                }
-            };
-
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         while(true){
                             Log.i(TAG,"YUYAO ");
-                            SimpleDateFormat sdf=new SimpleDateFormat("HH:mm:ss");
+                            SimpleDateFormat sdf=new SimpleDateFormat("dd HH:mm");
 //                            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            String str=sdf.format(new Date());
-                            Log.i(TAG,"str "+str);
-                            handler.sendMessage(handler.obtainMessage(100,str));
-                            Thread.sleep(1000);
+                            Message msg = new Message();
+                            msg.obj=sdf.format(new Date());
+
+                            Calendar c = Calendar.getInstance();
+                            int mMonth = c.get(Calendar.MONTH);//获取当前月份;
+                            int mWeek = c.get(Calendar.DAY_OF_WEEK);//获取周;
+                            if (Calendar.MONDAY == mWeek){
+                                msg.arg1 = 0;
+                            } else if (Calendar.TUESDAY == mWeek){
+                                msg.arg1 = 1;
+                            } else if (Calendar.WEDNESDAY == mWeek){
+                                msg.arg1 = 2;
+                            } else if (Calendar.THURSDAY == mWeek){
+                                msg.arg1 = 3;
+                            } else if (Calendar.FRIDAY == mWeek){
+                                msg.arg1 = 4;
+                            } else if (Calendar.SATURDAY == mWeek){
+                                msg.arg1 = 5;
+                            }else if (Calendar.SUNDAY == mWeek){
+                                msg.arg1 = 6;
+                            }
+                            switch (mMonth){
+                                case Calendar.JANUARY:
+                                    msg.arg2 = 0;
+                                    break;
+                                case Calendar.FEBRUARY:
+                                    msg.arg2 = 1;
+                                    break;
+                                case Calendar.MARCH:
+                                    msg.arg2 = 2;
+                                    break;
+                                case Calendar.APRIL:
+                                    msg.arg2 = 3;
+                                    break;
+                                case Calendar.MAY:
+                                    msg.arg2 = 4;
+                                    break;
+                                case Calendar.JUNE:
+                                    msg.arg2 = 5;
+                                    break;
+                                case Calendar.JULY:
+                                    msg.arg2 = 6;
+                                    break;
+                                case Calendar.AUGUST:
+                                    msg.arg2 = 7;
+                                    break;
+                                case Calendar.SEPTEMBER:
+                                    msg.arg2 = 8;
+                                    break;
+                                case Calendar.OCTOBER:
+                                    msg.arg2 = 9;
+                                    break;
+                                case Calendar.NOVEMBER:
+                                    msg.arg2 = 10;
+                                    break;
+                                case Calendar.DECEMBER:
+                                    msg.arg2 = 11;
+                                    break;
+                            }
+
+                            handler.sendMessage(handler.obtainMessage(100,msg.arg1,msg.arg2,msg.obj));
+
+                            Thread.sleep(1000*60);
                         }
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
@@ -67,4 +227,14 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager {
                 }
             }).start();
         }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_menu:
+                Log.i(TAG,"yuyao menu");
+                mContent.finish();
+                break;
+        }
+    }
 }

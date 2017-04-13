@@ -29,11 +29,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Toast;
+import android.widget.RatingBar;
 
 import com.shoplex.bible.biblelock.fragment.DrawerFragment;
 import com.shoplex.bible.biblelock.fragment.ImageFragment;
 import com.shoplex.bible.biblelock.fragment.TextFragment;
+import com.shoplex.bible.biblelock.server.ServiceActivity;
+import com.shoplex.bible.biblelock.utils.SharedPreferencesUtils;
+import com.shoplex.bible.biblelock.utils.ToastUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -59,6 +62,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             initFragment();
         }
 
+        //判断是否开启锁屏服务
+        Intent intent = new Intent(MainActivity.this,ServiceActivity.class);
+        boolean isChecked = (boolean) SharedPreferencesUtils.get(MainActivity.this,"isChecked",false);
+        if (isChecked){
+            startService(intent);
+        }else {
+            stopService(intent);
+        }
 
         btv_image.setOnClickListener(this);
         btv_text.setOnClickListener(this);
@@ -131,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.ib_toolbar:
                 Log.i(TAG,"yuyao ib_toolbar");
-                Toast.makeText(this,"此处是广告位", Toast.LENGTH_LONG).show();
+                ToastUtil.showToast(this,"此处是广告位");
                 break;
         }
         // 事务提交
@@ -175,7 +186,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_setting:
-                showPopwindow(R.layout.popwindow_rateus,Gravity.CENTER);
+
+                View view = showPopwindow(R.layout.popwindow_rateus,Gravity.CENTER);
+                RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingbar);
+                Object rating = SharedPreferencesUtils.get(MainActivity.this,"RATING",(float)0);
+                Log.i(TAG,"yuyao rating = " + rating);
+                ratingBar.setRating((float) rating);
+
+                ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        ToastUtil.showToast(MainActivity.this, "评价了" + rating + "星");
+                        SharedPreferencesUtils.put(MainActivity.this,"RATING",rating);
+                    }
+                });
+
                 break;
 
             case R.id.action_setting12:
@@ -238,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 显示popupWindow
      */
-    private void showPopwindow(int layout,int gravity) {
+    private View showPopwindow(int layout,int gravity) {
         // 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layout, null);
@@ -283,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println("popWindow消失");
             }
         });
-
+        return view;
     }
 }
 

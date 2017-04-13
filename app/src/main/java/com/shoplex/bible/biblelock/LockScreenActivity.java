@@ -10,15 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import com.shoplex.bible.biblelock.viewpager.BaseLockScreenViewPager;
 import com.shoplex.bible.biblelock.viewpager.FirstLockScreenViewPager;
 import com.shoplex.bible.biblelock.viewpager.LockViewPager;
 import com.shoplex.bible.biblelock.viewpager.SecondLockScreenViewpager;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -35,6 +34,8 @@ public class LockScreenActivity extends SwipeBackActivity {
     private LockViewPager viewPager;
     private ArrayList<BaseLockScreenViewPager> arrayList;
     public static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000;
+    private FrameLayout frameLayout;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,25 +45,22 @@ public class LockScreenActivity extends SwipeBackActivity {
                         | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         this.getWindow().setFlags(FLAG_HOMEKEY_DISPATCHED, FLAG_HOMEKEY_DISPATCHED);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_lock);
 
         getSwipeBackLayout().setSwipeMode(SwipeBackLayout.FULL_SCREEN_LEFT);
-//        getSwipeBackLayout().setEdgeTrackingEnabled(SwipeBackLayout.FULL_SCREEN_LEFT);
-//        getSwipeBackLayout().setSwipeMode(SwipeBackLayout.EDGE_ALL);
+
+
+        frameLayout = (FrameLayout) findViewById(R.id.fl_flamelayout_lock);
 
         viewPager = (LockViewPager) findViewById(R.id.vp_viewpager_lock);
         initData();
         viewPager.setAdapter(new LockScreenAdapter());
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日   HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());
-        String str = formatter.format(curDate);
 
-//        String str1 = formatDataForDisplay("2001.12.12-08:23:21");
-        Log.i(TAG,"yuyao str = " + str );
-//        Log.i(TAG,"yuyao str1 = " + str1 );
 
     }
+
 
     private void initData(){
 
@@ -145,5 +143,10 @@ public class LockScreenActivity extends SwipeBackActivity {
             container.removeView((View)object);
 
         }
+    }
+
+
+    public FrameLayout getFrameLayout(){
+        return frameLayout;
     }
 }

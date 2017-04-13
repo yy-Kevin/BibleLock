@@ -1,8 +1,6 @@
 package com.shoplex.bible.biblelock.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +11,9 @@ import android.widget.ViewFlipper;
 
 import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.bean.Comment;
+import com.shoplex.bible.biblelock.utils.TimeUtils;
 
-import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -97,7 +91,7 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
                     iHolder.vf_viewfilpper.addView(list.get(i));
                 }
                 position = position%2;
-                String time = formatDataForDisplay(mList.get(position).getTime());
+                String time = TimeUtils.formatDataForDisplay(mList.get(position).getTime());
                 iHolder.tv_image_time.setText(time);
 
                 iHolder.vf_viewfilpper.setInAnimation(mContext, R.anim.push_up_in);
@@ -115,15 +109,6 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
         return view;
     }
 
-    private List<TextView> getData() {
-        List<TextView> list = new ArrayList<TextView>();
-        for (int i = 0; i < 5; i++) {
-            TextView tv = (TextView) new TextView(mContext);
-            tv.setText("这是测试用的第 " + i + i + i + i + " 行测试数据：");
-            list.add(tv);
-        }
-        return list;
-    }
 
     private List<FrameLayout> getData1() {
         List<FrameLayout> list = new ArrayList<FrameLayout>();
@@ -137,6 +122,7 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
         return list;
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -145,7 +131,7 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
                 break;
             case R.id.tv_image_share:
                 Log.i(TAG,"share share");
-                shareMsg(mContext, "MainAcitvity" ,"快使用我们把","我们是最好的的",null);
+                TimeUtils.shareMsg(mContext, "MainAcitvity" ,"快使用我们把","我们是最好的的",null);
                 break;
         }
     }
@@ -157,73 +143,5 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
         TextView tv_image_like;
     }
 
-    public static String formatDataForDisplay(String strData) {
-        Date date = new Date();
-
-        Calendar date1 = Calendar.getInstance();
-        date1.get(Calendar.HOUR_OF_DAY);//得到24小时机制的
-//        date.get(Calendar.HOUR);//   得到12小时机制的
-        // 转换为标准时间
-        SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date issueDate = null;
-        try {
-            issueDate = myFormatter.parse(strData);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Date currTime1 = date1.getTime();
-        long currTime = currTime1.getTime();
-        long issueTime = issueDate.getTime();
-        long diff = currTime - issueTime;
-        diff = diff / 1000;//秒
-        if (diff / 60 < 1) {
-            return "刚刚";
-        }
-        if (diff / 60 >= 1 && diff / 60 <= 60) {
-            return diff / 60 + "分钟前";
-        }
-        if (diff / 3600 > 0 && diff / 3600 <= 24) {
-            return diff / 3600 + "小时前";
-        }
-        if (diff / (3600 * 24) > 0 && diff / (3600 * 24) < 2) {
-            return "昨天";
-        }
-        if (diff / (3600 * 24) > 1 && diff / (3600 * 24) < 3) {
-            return "前天";
-        }
-        if (diff / (3600 * 24) > 2) {
-            return formatter.format(issueDate);
-        }
-        return "";
-    }
-
-    /**
-     * 分享功能
-     * @param mContext
-     * @param activityTitle
-     * @param msgTitle
-     * @param msgText
-     * @param imgPath
-     */
-    public void shareMsg(Context mContext, String activityTitle, String msgTitle, String msgText,
-                         String imgPath) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        if (imgPath == null || imgPath.equals("")) {
-            intent.setType("text/plain"); // 纯文本
-        } else {
-            File f = new File(imgPath);
-            if (f != null && f.exists() && f.isFile()) {
-                intent.setType("image/jpg");
-                Uri u = Uri.fromFile(f);
-                intent.putExtra(Intent.EXTRA_STREAM, u);
-            }
-        }
-        intent.putExtra(Intent.EXTRA_SUBJECT, msgTitle);
-        intent.putExtra(Intent.EXTRA_TEXT, msgText);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.mContext.startActivity(Intent.createChooser(intent, activityTitle));
-    }
 }
 

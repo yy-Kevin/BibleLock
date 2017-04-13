@@ -40,7 +40,7 @@
                     android:textSize="18dp" />
 
                 <CheckBox
-                    android:id="@+id/ib_rotaus"
+                    android:id="@+id/ib_of_the_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -64,7 +64,7 @@
                     android:textSize="18dp" />
 
                 <CheckBox
-                    android:id="@+id/ib_feedbock"
+                    android:id="@+id/ib_lock_screen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -90,7 +90,7 @@
                     android:textSize="18dp" />
 
                 <CheckBox
-                    android:id="@+id/ib_settings"
+                    android:id="@+id/ib_charge_sreen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

@@ -8,48 +8,52 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.widget.CompoundButton;
 
 import com.shoplex.bible.biblelock.databinding.ActivitySettingsBinding;
 import com.shoplex.bible.biblelock.server.ServiceActivity;
+import com.shoplex.bible.biblelock.utils.SharedPreferencesUtils;
 
 /**
  * Created by qsk on 2017/4/11.
  */
 
-public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingActivity extends AppCompatActivity{
 
     private ActionBar actionBar;
     private ActivitySettingsBinding binding;
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_settings);
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_settings);
 
-        binding.ibRotaus.setOnClickListener(this);
-        binding.ibFeedbock.setOnClickListener(this);
-        binding.ibSettings.setOnClickListener(this);
+        intent = new Intent(SettingActivity.this,ServiceActivity.class);
 
+        boolean isChecked = (boolean) SharedPreferencesUtils.get(SettingActivity.this,"isChecked",false);
+        if (isChecked){
+            binding.ibLockScreen.setChecked(true);
+            startService(intent);
+        }else {
+            binding.ibLockScreen.setChecked(false);
+            stopService(intent);
+        }
 
-        binding.ibFeedbock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.ibLockScreen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Intent intent = new Intent(SettingActivity.this,ServiceActivity.class);
                 if (isChecked){
                     startService(intent);
+                    SharedPreferencesUtils.put(SettingActivity.this,"isChecked",isChecked);
                 } else {
                     stopService(intent);
+                    SharedPreferencesUtils.put(SettingActivity.this,"isChecked",isChecked);
                 }
             }
         });
-
-
 
         Toolbar toolbar = (Toolbar) this.findViewById(R.id.toolbar_image);
         setSupportActionBar(toolbar);
@@ -67,25 +71,5 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
         return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-
-            case R.id.ib_rotaus:
-
-
-                break;
-
-            case R.id.ib_feedbock:
-
-                 break;
-
-            case R.id.ib_settings:
-
-
-                break;
-        }
     }
 }

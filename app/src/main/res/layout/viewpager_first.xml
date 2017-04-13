@@ -1,30 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/lock_back"
-    >
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:background="@drawable/lock_logo" />
+    <RelativeLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/ll_first_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_first_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/lock_logo" />
+
+        <Button
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_menu"
+            android:clickable="true"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/menu"/>
+
+        <ImageView
+            android:layout_marginRight="50dp"
+            android:layout_toLeftOf="@id/iv_menu"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:id="@+id/iv_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/weather"/>
+
+    </RelativeLayout>
+
 
     <TextView
-        android:id="@+id/tv_time"
+        android:id="@+id/tv_time1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ll_first_imageview"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
-        android:layout_marginTop="30dp"
         android:text="00:00"
-        android:textSize="50dp" />
+        android:textSize="60dp" />
+
+    <TextView
+        android:id="@+id/tv_time2"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_time1"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:text="Friday,June 27" />
 
     <ImageView
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/slidetounlock"
+        android:id="@+id/tv_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_time2"
+        android:layout_centerInParent="true"
+        android:background="@drawable/data"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal" />
+
+    <RelativeLayout
+        android:layout_below="@id/tv_data"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/iv_wifi"
+            android:background="@drawable/wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/xingxing" />
+
+        <TextView
+            android:textSize="22dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:text="Slide to unlock >>>" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/clear" />
+
+    </RelativeLayout>
 </RelativeLayout>
