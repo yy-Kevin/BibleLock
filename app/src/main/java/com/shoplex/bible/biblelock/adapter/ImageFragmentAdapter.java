@@ -115,7 +115,7 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
         for (int i = 0; i < 5; i++) {
             FrameLayout fl = (FrameLayout) new FrameLayout(mContext);
 //            tv.setText("这是测试用的第 " + i + i + i + i + " 行测试数据：");
-            View view = View.inflate(mContext,R.layout.comment_item,null);
+            View view = View.inflate(mContext,R.layout.comment_image_item,null);
             fl.addView(view);
             list.add(fl);
         }

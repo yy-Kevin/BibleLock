@@ -1,14 +1,17 @@
 package com.shoplex.bible.biblelock.viewpager;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.shoplex.bible.biblelock.R;
@@ -17,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.facebook.GraphRequest.TAG;
 
 /**
  * Created by qsk on 2017/4/12.
@@ -105,7 +107,7 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
     private String[] week = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
     private String[] mothun = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
     private TextView tv_time2;
-    private Button iv_menu;
+    private ImageView iv_menu;
 
     public FirstLockScreenViewPager(Activity context) {
         super(context);
@@ -116,7 +118,7 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
         View view = View.inflate(mContent, R.layout.viewpager_first, null);
         tv_time1 = (TextView) view.findViewById(R.id.tv_time1);
         tv_time2 = (TextView) view.findViewById(R.id.tv_time2);
-        iv_menu = (Button) view.findViewById(R.id.iv_menu);
+        iv_menu = (ImageView) view.findViewById(R.id.iv_menu);
 
 
         ImageView tv = (ImageView) view.findViewById(R.id.iv_wifi);
@@ -125,7 +127,7 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
         iv_menu.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.i(TAG,"yuyao onTouch setOnTouchListener");
+
                 ViewGroup viewGroup = (ViewGroup) v.getParent();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_MOVE:
@@ -153,7 +155,6 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
                 public void run() {
                     try {
                         while(true){
-                            Log.i(TAG,"YUYAO ");
                             SimpleDateFormat sdf=new SimpleDateFormat("dd HH:mm");
 //                            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             Message msg = new Message();
@@ -232,9 +233,37 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_menu:
-                Log.i(TAG,"yuyao menu");
-                mContent.finish();
+                showPopUp(iv_menu);
                 break;
         }
     }
+
+    private void showPopUp(View v) {
+        LinearLayout layout = new LinearLayout(mContent);
+        layout.setBackgroundColor(Color.GRAY);
+        TextView tv = new TextView(mContent);
+        tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        tv.setText("back");
+        tv.setGravity(Gravity.CENTER);
+        tv.setTextColor(Color.WHITE);
+        layout.setGravity(Gravity.CENTER_HORIZONTAL);
+        layout.addView(tv);
+
+        PopupWindow popupWindow = new PopupWindow(layout,140,80);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContent.finish();
+            }
+        });
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
+        int[] location = new int[2];
+        v.getLocationOnScreen(location);
+
+        popupWindow.showAsDropDown(v, -100, 0);
+    }
+
 }

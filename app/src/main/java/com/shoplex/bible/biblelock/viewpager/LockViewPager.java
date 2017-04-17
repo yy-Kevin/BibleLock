@@ -72,7 +72,7 @@ public class LockViewPager extends ViewPager {
                     Log.i(TAG,"yuyao dis 2222");
 
                     float motionValue = ev.getX() - beforeX;
-                    if (motionValue < 20) {//不能禁止左滑
+                    if (motionValue < 0) {//不能禁止左滑
                         Log.i(TAG,"yuyao dis 3333");
 
                         getParent().requestDisallowInterceptTouchEvent(true);

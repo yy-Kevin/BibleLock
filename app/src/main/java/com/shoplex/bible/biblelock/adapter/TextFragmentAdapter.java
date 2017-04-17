@@ -62,7 +62,6 @@ public class TextFragmentAdapter extends BaseAdapter implements View.OnClickList
 
             holder.tv_text_like = (TextView) convertView.findViewById(R.id.tv_text_like);
             holder.tv_text_comment = (TextView) convertView.findViewById(R.id.tv_text_comment);
-            holder.animation = (TextView) convertView.findViewById(R.id.animation);
             holder.tv_text_share = (TextView) convertView.findViewById(R.id.tv_text_share);
             holder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
             convertView.setTag(holder);
@@ -92,7 +91,6 @@ public class TextFragmentAdapter extends BaseAdapter implements View.OnClickList
 
 
     private class TextHolder {
-        TextView animation;
         TextView tv_time;
         TextView tv_text_like;
         TextView tv_text_share;

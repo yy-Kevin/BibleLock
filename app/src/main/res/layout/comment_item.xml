@@ -8,8 +8,10 @@
 
 
     <LinearLayout
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -23,21 +25,19 @@
             android:id="@+id/tv_image_comment_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="14dp"
             android:layout_toLeftOf="@id/profile_image"
-            android:paddingLeft="10dp"
-            android:text="q qqqqq qqqqq qqqqq q qqqqq qqqqq qqqqq q qqqqq qqqqq qqqqq q qqqqq qqqqq qqqqq q qqqqq qqqqq qqqqq q qqqqq qqqqq qqqqq q qqqqq qqqqq qqqqq q qqqqq qqqqq qqqqq q qqqqq qqqqq qqqqq" />
-
+            android:text="Lord Jesus Christ.I offer to all my doubt problems and buerden,help me to find the solution,strengh to carry all this trials in my life,I love u."/>
     </LinearLayout>
 
-    <View
-        android:layout_marginTop="10dp"
+    <ImageView
+        android:layout_marginTop="14dp"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="#aaa"
-        android:padding="6dp" />
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/rectangle"/>
 
 </LinearLayout>

@@ -1,47 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<layout>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/shading"
-    tools:context="com.shoplex.bible.biblelock.MainActivity">
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar" />
-
-    <LinearLayout
-        android:id="@+id/ll_button_select"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/include"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="15dp">
-        <Button
-            android:id="@+id/btv_image"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_select"
-            android:text="IMAGE" />
-
-        <Button
-            android:id="@+id/btv_text"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/text_button_select"
-            android:text="TEXT" />
-
-    </LinearLayout>
-    <FrameLayout
-        android:id="@+id/fl_content"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_button_select"
-        android:background="#22ffffff"
-        android:paddingTop="10dp">
-    </FrameLayout>
+        android:background="@drawable/shading"
+        tools:context="com.shoplex.bible.biblelock.MainActivity">
 
-</RelativeLayout>
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar" />
+
+        <LinearLayout
+            android:id="@+id/ll_button_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/include"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
+
+            <Button
+                android:id="@+id/btv_image"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_select"
+                android:text="Image"
+                android:textAllCaps="false"
+                android:textColor="@drawable/button_color_select"
+                android:textSize="18dp" />
+
+            <Button
+                android:id="@+id/btv_text"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_button_select"
+                android:text="Text"
+                android:textAllCaps="false"
+                android:textColor="@drawable/button_color_select"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_button_select"
+            android:background="#22ffffff"
+            android:paddingTop="10dp"></FrameLayout>
+
+    </RelativeLayout>
+</layout>

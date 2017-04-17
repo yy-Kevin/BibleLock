@@ -4,9 +4,9 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,13 +25,12 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
 
-import com.shoplex.bible.biblelock.fragment.DrawerFragment;
+import com.shoplex.bible.biblelock.databinding.ActivityMainBinding;
 import com.shoplex.bible.biblelock.fragment.ImageFragment;
 import com.shoplex.bible.biblelock.fragment.TextFragment;
 import com.shoplex.bible.biblelock.server.ServiceActivity;
@@ -43,25 +42,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
     private ImageFragment imageFragment;
     private TextFragment textFragment;
-    private Button btv_image;
-    private Button btv_text;
     private ActionBar actionBar;
-    private DrawerLayout mDrawerLayout;
-    private DrawerFragment drawerFragment;
     private Toolbar toolbar;
     private ImageView ib_toolbar;
     private RotateAnimation operatingAnim;
     private boolean isExit;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
         initView();
         if (savedInstanceState == null) {
             initFragment();
         }
-
         //判断是否开启锁屏服务
         Intent intent = new Intent(MainActivity.this,ServiceActivity.class);
         boolean isChecked = (boolean) SharedPreferencesUtils.get(MainActivity.this,"isChecked",false);
@@ -71,34 +69,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             stopService(intent);
         }
 
-        btv_image.setOnClickListener(this);
-        btv_text.setOnClickListener(this);
-        startAnimation(ib_toolbar);
-        ib_toolbar.setOnClickListener(this);
 
-        btv_image.setSelected(true);
-        btv_text.setSelected(false);
+        binding.btvImage.setOnClickListener(this);
+        binding.btvText.setOnClickListener(this);
+        ib_toolbar.setOnClickListener(this);
+        startAnimation(ib_toolbar);
+
+        binding.btvImage.setSelected(true);
+        binding.btvText.setSelected(false);
     }
 
 
     private void initView(){
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
-        btv_image = (Button) findViewById(R.id.btv_image);
-        btv_text = (Button) findViewById(R.id.btv_text);
+//        setContentView(R.layout.activity_main);
         toolbar = (Toolbar) this.findViewById(R.id.toolbar);
         ib_toolbar = (ImageView) toolbar.findViewById(R.id.ib_toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-
         //在二级界面等Activity中，通过如下设置可以在Toolbar左边显示一个返回按钮：
         actionBar.setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(null);
         actionBar.setTitle("");
-
         // 通过代码的方式 给三个小点 换图标
-        toolbar.setOverflowIcon(getDrawable(R.drawable.share));
-
+        toolbar.setOverflowIcon(getDrawable(R.drawable.menu_icon));
 //
 //        //初始化抽屉布局
 //        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
@@ -109,9 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initFragment(){
         imageFragment = new ImageFragment();
-
         getFragmentManager().beginTransaction().replace(R.id.fl_content, imageFragment).commit();
-
     }
 
     @Override
@@ -123,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.btv_image:
-                btv_image.setSelected(true);
-                btv_text.setSelected(false);
+                binding.btvImage.setSelected(true);
+                binding.btvText.setSelected(false);
                 if (imageFragment == null) {
                     imageFragment = new ImageFragment();
                 }
@@ -132,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 isExit = false;
                 break;
             case R.id.btv_text:
-                btv_image.setSelected(false);
-                btv_text.setSelected(true);
+                binding.btvImage.setSelected(false);
+                binding.btvText.setSelected(true);
                 if (textFragment == null) {
                     textFragment = new TextFragment();
                 }

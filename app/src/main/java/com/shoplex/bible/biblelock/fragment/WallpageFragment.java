@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.shoplex.bible.biblelock.LockScreenActivity;
 import com.shoplex.bible.biblelock.R;
+import com.shoplex.bible.biblelock.utils.SharedPreferencesUtils;
 
 /**
  * Created by qsk on 2017/3/28.
@@ -56,6 +57,7 @@ public class WallpageFragment extends Fragment {
             public void onItemClick(View view, int data) {
                 LockScreenActivity activity = (LockScreenActivity)mActivity;
                 activity.getFrameLayout().setBackgroundResource(datas[data]);
+                SharedPreferencesUtils.put(getActivity(),"BACKGROUND",(int)datas[data]);
             }
         });
 

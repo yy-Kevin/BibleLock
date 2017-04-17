@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -20,8 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shoplex.bible.biblelock.TextCommentActivity;
 import com.shoplex.bible.biblelock.R;
+import com.shoplex.bible.biblelock.TextCommentActivity;
 import com.shoplex.bible.biblelock.adapter.TextFragmentAdapter;
 import com.shoplex.bible.biblelock.bean.Comment;
 
@@ -37,7 +36,6 @@ public class TextFragment extends Fragment implements View.OnClickListener {
     private ListView lv_fragment_text;
     private EditText editText;
     private RelativeLayout relativeLayout;
-    private Button comment_send;
     private TextView hide_down;
     private ArrayList<Comment> arrayList;
     private TextFragmentAdapter textAdapter;
@@ -67,7 +65,6 @@ public class TextFragment extends Fragment implements View.OnClickListener {
         rl_comment = (RelativeLayout) popup.findViewById(R.id.rl_comment);
         hide_down = (TextView) popup.findViewById(R.id.hide_down);
         editText = (EditText) popup.findViewById(R.id.comment_content);
-        comment_send = (Button) popup.findViewById(R.id.comment_send);
 
         popupWindow = new PopupWindow(mActivity);
         popupWindow.setContentView(popup);
@@ -89,7 +86,6 @@ public class TextFragment extends Fragment implements View.OnClickListener {
         textAdapter = new TextFragmentAdapter(mActivity, arrayList);
         lv_fragment_text.setAdapter(textAdapter);
         hide_down.setOnClickListener(this);
-        comment_send.setOnClickListener(this);
         hide_down.setOnClickListener(this);
 
         textAdapter.setOnclicListener(new TextFragmentAdapter.onClickListener() {
@@ -126,9 +122,6 @@ public class TextFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.hide_down:
                 popupWindow.dismiss();
-                break;
-            case R.id.comment_send:
-                sendComment();
                 break;
         }
     }

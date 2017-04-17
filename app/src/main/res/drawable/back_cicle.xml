@@ -8,7 +8,7 @@
         android:width="1dp"
         android:color="@android:color/transparent" /><!--矩形的边线  -->
     <gradient
-        android:endColor="#00000000"
-        android:startColor="#666" /><!-- 矩形的内部颜色，这里设置成白色，即空心 -->
+        android:endColor="#60414141"
+        android:startColor="#60414141" /><!-- 矩形的内部颜色，这里设置成白色，即空心 -->
 
 </shape>

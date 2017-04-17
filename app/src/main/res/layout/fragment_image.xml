@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/id_swipe_ly"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <ListView
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp"
-            android:dividerHeight="10dp"
-            android:background="#22ffffff"
-            android:divider="@android:color/transparent"
             android:id="@+id/lv_fragment_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#22ffffff"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
         </ListView>
 
@@ -29,12 +29,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
-        app:backgroundTint="#796033"
-        app:rippleColor="#0ff"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
-        android:src="@drawable/like" />
+        android:src="@drawable/checkmark"
+        app:backgroundTint="#796033"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="#0ff" />
 
 </FrameLayout>

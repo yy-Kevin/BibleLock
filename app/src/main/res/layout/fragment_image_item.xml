@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="360dp"
+    android:layout_height="400dp"
     android:background="@drawable/shape_corner"
-    android:elevation="2dp"
+
+    android:elevation="6dp"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp">
-
-
-        <ImageView
-            android:id="@+id/iv_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/share" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="14dp"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/iv_image"
+            android:drawableLeft="@drawable/icon_image"
+            android:drawablePadding="6dp"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:text="ssss" />
+            android:text="Verse of the Day Image" />
 
         <TextView
             android:id="@+id/tv_image_time"
@@ -33,38 +30,40 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:gravity="center"
-            android:text="bbbbb" />
+            android:text="Today" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="400dp"
-            android:background="@drawable/photo"
-            android:padding="10dp" />
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@drawable/photo" />
 
         <ViewFlipper
             android:id="@+id/vf_viewfilpper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:padding="10dp" >
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="6dp">
 
-        </ViewFlipper>>
+        </ViewFlipper>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
         android:gravity="right"
-        android:padding="6dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="14dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -92,9 +91,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="16dp"
             android:drawableLeft="@drawable/share"
-            android:drawablePadding="4dp"
-            android:text="303" />
+            android:drawablePadding="4dp" />
+
     </LinearLayout>
 
 </LinearLayout>

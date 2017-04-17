@@ -18,10 +18,16 @@ import android.widget.ListView;
 import com.shoplex.bible.biblelock.ImageCommentActivity;
 import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.adapter.ImageFragmentAdapter;
+import com.shoplex.bible.biblelock.api.ApiManager;
 import com.shoplex.bible.biblelock.bean.Comment;
+import com.shoplex.bible.biblelock.bean.Result;
 import com.shoplex.bible.biblelock.utils.ToastUtil;
 
 import java.util.ArrayList;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by qsk on 2017/3/28.
@@ -53,6 +59,8 @@ public class ImageFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         Log.i(TAG,"yuyao onActivityCreated");
+        //请求网路
+        initInnet();
         ArrayList<Comment> arrayList = new ArrayList();
         arrayList.add(new Comment());
         arrayList.add(new Comment());
@@ -78,6 +86,8 @@ public class ImageFragment extends Fragment {
                 fab_action.setVisibility(View.GONE);
             }
         });
+
+
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -95,5 +105,29 @@ public class ImageFragment extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
     }
+
+    private void initInnet(){
+
+        ApiManager.apiManager.getReslut()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Result>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.i(TAG,"yuyao onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i(TAG,"yuyao onCompleted");
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        Log.i(TAG,"yuyao onCompleted");
+                    }
+                });
+    }
+
 }
 

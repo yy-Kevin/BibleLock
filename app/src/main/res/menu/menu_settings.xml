@@ -6,21 +6,18 @@
 
     <item
         android:id="@+id/action_setting"
-        android:icon="@drawable/qq"
         android:orderInCategory="100"
         android:title="Rate Us"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_setting12"
-        android:icon="@drawable/qq"
         android:orderInCategory="100"
         android:title="FeedBack"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_setting13"
-        android:icon="@drawable/qq"
         android:orderInCategory="100"
         android:title="Settings"
         app:showAsAction="never" />

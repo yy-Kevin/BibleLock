@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import com.shoplex.bible.biblelock.utils.SharedPreferencesUtils;
 import com.shoplex.bible.biblelock.viewpager.BaseLockScreenViewPager;
 import com.shoplex.bible.biblelock.viewpager.FirstLockScreenViewPager;
 import com.shoplex.bible.biblelock.viewpager.LockViewPager;
@@ -57,6 +58,8 @@ public class LockScreenActivity extends SwipeBackActivity {
         initData();
         viewPager.setAdapter(new LockScreenAdapter());
 
+        int back = (int) SharedPreferencesUtils.get(this,"BACKGROUND",R.drawable.lock_back);
+        frameLayout.setBackgroundResource(back);
 
 
     }
