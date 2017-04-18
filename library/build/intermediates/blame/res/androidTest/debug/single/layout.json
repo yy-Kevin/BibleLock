@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\QISIKE\\BibleLock\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_multichoice_material.xml",
-        "source": "C:\\Users\\qsk\\.android\\build-cache\\2f2d8fa67f1797fb8fa1c9318d0ca29a4be0943b\\output\\res\\layout\\select_dialog_multichoice_material.xml"
-    },
-    {
         "merged": "D:\\QISIKE\\BibleLock\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_close_item_material.xml",
         "source": "C:\\Users\\qsk\\.android\\build-cache\\2f2d8fa67f1797fb8fa1c9318d0ca29a4be0943b\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "D:\\QISIKE\\BibleLock\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "C:\\Users\\qsk\\.android\\build-cache\\2f2d8fa67f1797fb8fa1c9318d0ca29a4be0943b\\output\\res\\layout\\select_dialog_multichoice_material.xml"
     },
     {
         "merged": "D:\\QISIKE\\BibleLock\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_media.xml",

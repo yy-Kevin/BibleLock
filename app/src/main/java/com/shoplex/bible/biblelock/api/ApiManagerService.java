@@ -7,6 +7,7 @@ import java.util.Map;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -25,8 +26,8 @@ public interface ApiManagerService {
     Observable<Result> getVerfcationGet(@Query("tel") String tel, @Query("password") String pass);
 
     //GET请求
-    @GET("/github")
-    Observable<Result> getReslut();
+    @GET("books/{id}")
+    Observable<Result> getReslut(@Path("id") int id);
 
 
     //GET请求，设置缓存

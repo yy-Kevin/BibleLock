@@ -6,6 +6,6 @@ package com.shoplex.bible.biblelock.location;
 
 public class LoactionUrl {
 
-    public static final String API_SERVER = "https://github.com";
+    public static final String API_SERVER = "https://api.beta.wuxiamagic.com/";
 
 }

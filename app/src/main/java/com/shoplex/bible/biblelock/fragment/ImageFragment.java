@@ -47,7 +47,7 @@ public class ImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Log.i(TAG,"yuyao onCreateView");
-        View view = View.inflate(getContext(), R.layout.fragment_image, null);
+        View view = View.inflate(getActivity(), R.layout.fragment_image, null);
         lv_fragment_image = (ListView) view.findViewById(R.id.lv_fragment_image);
         fab_action = (FloatingActionButton) view.findViewById(R.id.fab_action);
         mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.id_swipe_ly);
@@ -66,7 +66,7 @@ public class ImageFragment extends Fragment {
         arrayList.add(new Comment());
         arrayList.add(new Comment());
 
-        textAdapter = new ImageFragmentAdapter(getContext(),arrayList);
+        textAdapter = new ImageFragmentAdapter(getActivity(),arrayList);
         lv_fragment_image.setAdapter(textAdapter);
         lv_fragment_image.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -108,7 +108,7 @@ public class ImageFragment extends Fragment {
 
     private void initInnet(){
 
-        ApiManager.apiManager.getReslut()
+        ApiManager.apiManager.getReslut(4)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Result>() {
@@ -119,12 +119,16 @@ public class ImageFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i(TAG,"yuyao onCompleted");
+                        Log.i(TAG,"yuyao onError");
+                        e.printStackTrace();
                     }
 
                     @Override
                     public void onNext(Result result) {
-                        Log.i(TAG,"yuyao onCompleted");
+
+                        Log.i(TAG,"yuyao onNext");
+                        Log.i(TAG,"result 1111" + result.getData().getIntroduction());
+                        Log.i(TAG,"yuyao result = " + result.toString());
                     }
                 });
     }

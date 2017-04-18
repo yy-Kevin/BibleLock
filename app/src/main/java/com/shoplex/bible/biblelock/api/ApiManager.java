@@ -30,7 +30,7 @@ public class ApiManager {
      *
      * @return
      */
-    protected static Retrofit getRetrofit(String baseUrl) {
+    public static Retrofit getRetrofit(String baseUrl) {
 
         if (mRetrofit == null) {
 
