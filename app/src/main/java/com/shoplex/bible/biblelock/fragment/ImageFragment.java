@@ -21,11 +21,12 @@ import com.shoplex.bible.biblelock.adapter.ImageFragmentAdapter;
 import com.shoplex.bible.biblelock.api.ApiManager;
 import com.shoplex.bible.biblelock.bean.Comment;
 import com.shoplex.bible.biblelock.bean.Result;
+import com.shoplex.bible.biblelock.progress.ProgressSubscriber;
+import com.shoplex.bible.biblelock.progress.SubscriberOnNextListener;
 import com.shoplex.bible.biblelock.utils.ToastUtil;
 
 import java.util.ArrayList;
 
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -41,6 +42,7 @@ public class ImageFragment extends Fragment {
     private ImageFragmentAdapter textAdapter;
     private Activity mActivity;
     private FloatingActionButton fab_action;
+    private SubscriberOnNextListener getTopMovieOnNext;
 
 
     @Nullable
@@ -91,12 +93,13 @@ public class ImageFragment extends Fragment {
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                initInnet();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Log.i(TAG,"下拉刷新成功");
                         // 停止刷新
+
                         mSwipeRefresh.setRefreshing(false);
                     }
                 }, 3000);
@@ -107,30 +110,21 @@ public class ImageFragment extends Fragment {
     }
 
     private void initInnet(){
+        getTopMovieOnNext = new SubscriberOnNextListener<Result>() {
+            @Override
+            public void onNext(Result result) {
+                Log.i(TAG,"result = " + result.getData().getIntroduction());
+            }
+        };
+
+        ProgressSubscriber process = new ProgressSubscriber(getTopMovieOnNext, getActivity());
+
 
         ApiManager.apiManager.getReslut(4)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Result>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.i(TAG,"yuyao onCompleted");
-                    }
+                .subscribe(process);
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i(TAG,"yuyao onError");
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onNext(Result result) {
-
-                        Log.i(TAG,"yuyao onNext");
-                        Log.i(TAG,"result 1111" + result.getData().getIntroduction());
-                        Log.i(TAG,"yuyao result = " + result.toString());
-                    }
-                });
     }
 
 }
