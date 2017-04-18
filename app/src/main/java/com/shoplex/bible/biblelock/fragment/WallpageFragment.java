@@ -39,7 +39,6 @@ public class WallpageFragment extends Fragment {
         View view = View.inflate(mActivity, R.layout.viewpager_wallpager, null);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
-
         final int[] datas = {R.drawable.wallpaper_2, R.mipmap.wallpaper_3, R.mipmap.wallpaper_4,R.mipmap.wallpaper_5, R.mipmap.wallpaper_6, R.mipmap.wallpaper_7,
                 R.mipmap.wallpaper_8,R.mipmap.wallpaper_9,R.mipmap.wallpaper_10};
 //创建默认的线性LayoutManager
