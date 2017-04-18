@@ -263,9 +263,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
 
         PopupWindow window = new PopupWindow(view);
-        window.setWidth(900);
+        window.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         window.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-
+        backgroundAlpha(0.4f);
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         window.setFocusable(true);
 
@@ -297,10 +297,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onDismiss() {
+                backgroundAlpha(1.0f);
                 System.out.println("popWindow消失");
             }
         });
         return view;
+    }
+
+    /**
+     * 设置添加屏幕的背景透明度
+     * @param bgAlpha
+     */
+    public void backgroundAlpha(float bgAlpha)
+    {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getWindow().setAttributes(lp);
     }
 }
 

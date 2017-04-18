@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/tv_text_share"
-            android:drawableLeft="@drawable/like"
+            android:drawableLeft="@drawable/like_select"
             android:drawablePadding="4dp"
             android:paddingRight="15dp"
             android:text="203" />

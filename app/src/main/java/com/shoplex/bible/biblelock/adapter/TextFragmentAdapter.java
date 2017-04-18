@@ -80,9 +80,12 @@ public class TextFragmentAdapter extends BaseAdapter implements View.OnClickList
             }
         });
 
+        if (position ==1 || position ==2){
+            holder.tv_text_like.setEnabled(false);
+        }
         holder.tv_text_like.setOnClickListener(this);
         holder.tv_text_share.setOnClickListener(this);
-        holder.tv_text_like.setSelected(isLike);
+
 
         String time = TimeUtils.formatDataForDisplay(mList.get(position).getTime());
         holder.tv_time.setText(time);
@@ -106,13 +109,7 @@ public class TextFragmentAdapter extends BaseAdapter implements View.OnClickList
 
                 break;
             case R.id.tv_text_like:
-                selectLike(v,isLike);
-                if (isLike){
-                    isLike = false;
-                }else {
-                    isLike = true;
-                }
-                Log.i(TAG,"like like");
+               notifyDataSetChanged();
                 break;
             case R.id.tv_text_share:
                 Log.i(TAG,"share share");
