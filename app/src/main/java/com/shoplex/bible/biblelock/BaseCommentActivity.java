@@ -104,6 +104,8 @@ public class BaseCommentActivity extends AppCompatActivity implements View.OnCli
             case R.id.tv_text_share:
                 TimeUtils.shareMsg(this,"","","","");
                 break;
+            case R.id.tv_text_comment:
+                break;
 
         }
     }
@@ -111,4 +113,5 @@ public class BaseCommentActivity extends AppCompatActivity implements View.OnCli
     public void sendComment(){
         Log.i(TAG,"yuyao sendComment");
     }
+
 }

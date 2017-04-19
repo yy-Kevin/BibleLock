@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <include layout="@layout/toolbar_text_comment" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shading">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingTop="14dp">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="285dp"
                     android:background="#ffffff">
+
                     <RelativeLayout
                         android:id="@+id/rl_text_comment"
                         android:layout_width="match_parent"
@@ -151,9 +157,9 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:layout_marginBottom="6dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:layout_marginBottom="6dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/rectangle" />
 
@@ -176,6 +182,7 @@
                         android:background="#94805c">
 
                         <EditText
+                            android:id="@+id/edittext_comment"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_gravity="center_vertical"

@@ -92,7 +92,7 @@
                                 android:text="203" />
 
                             <TextView
-                                android:id="@+id/tv_text_comment"
+                                android:id="@+id/tv_image_comment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_toLeftOf="@id/tv_text_like"
@@ -201,40 +201,41 @@
 
                     </LinearLayout>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="8dp"
-                        android:background="#94805c">
-
-                        <EditText
-                            android:id="@+id/comment_Content"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="#94805c"
-                            android:gravity="center_vertical"
-                            android:hint="add Comment"
-                            android:paddingLeft="6dp" />
-
-                        <Button
-                            android:id="@+id/comment_send"
-                            android:layout_width="wrap_content"
-                            android:layout_height="36dp"
-                            android:layout_alignParentRight="true"
-                            android:background="#94805c"
-                            android:text="Send" />
-
-                    </RelativeLayout>
-
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:id="@+id/rl_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="14dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#94805c">
+
+                    <EditText
+                        android:id="@+id/comment_Content"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#94805c"
+                        android:hint="add Comment"
+                        android:paddingLeft="6dp" />
+
+                    <Button
+                        android:id="@+id/comment_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:background="#94805c"
+                        android:text="Send" />
+
+                </RelativeLayout>
             </LinearLayout>
 
         </ScrollView>
+
 
     </LinearLayout>
 </layout>

@@ -39,15 +39,15 @@ public class WallpageFragment extends Fragment {
         View view = View.inflate(mActivity, R.layout.viewpager_wallpager, null);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
-        final int[] datas = {R.drawable.wallpaper_2, R.mipmap.wallpaper_3, R.mipmap.wallpaper_4,R.mipmap.wallpaper_5, R.mipmap.wallpaper_6, R.mipmap.wallpaper_7,
+        final int[] datas = {R.drawable.wallpaper_2, R.mipmap.wallpaper_0000, R.mipmap.wallpaper_0000,R.mipmap.wallpaper_0000, R.mipmap.wallpaper_0000, R.mipmap.wallpaper_0000,
                 R.mipmap.wallpaper_8,R.mipmap.wallpaper_9,R.mipmap.wallpaper_10};
-//创建默认的线性LayoutManager
+        //创建默认的线性LayoutManager
         mLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
+        //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
         mRecyclerView.setHasFixedSize(true);
-//创建并设置Adapter
+        //创建并设置Adapter
         MyAdapter mAdapter = new MyAdapter(datas);
         mRecyclerView.setAdapter(mAdapter);
 

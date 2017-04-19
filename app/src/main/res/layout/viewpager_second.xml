@@ -16,20 +16,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
-            android:drawableBottom="@drawable/select_process"
             android:layout_weight="1"
             android:background="@android:color/transparent"
+            android:drawableBottom="@drawable/select_process"
             android:drawablePadding="4dp"
             android:gravity="center"
             android:paddingTop="26dp"
             android:text="Verse"
+            android:textColor="#ffffff"
             android:textSize="24dp" />
 
         <TextView
+            android:id="@+id/tv_wallpaper"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:id="@+id/tv_wallpaper"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
@@ -37,16 +38,16 @@
             android:gravity="center"
             android:paddingTop="26dp"
             android:text="Wallpaper"
+            android:textColor="#ffffff"
             android:textSize="24dp" />
     </LinearLayout>
 
     <FrameLayout
-        android:layout_marginTop="4dp"
         android:id="@+id/fl_lock_twopager"
-        android:layout_below="@id/ll_textview_verson"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_textview_verson"
+        android:layout_marginTop="4dp">
 
 
     </FrameLayout>

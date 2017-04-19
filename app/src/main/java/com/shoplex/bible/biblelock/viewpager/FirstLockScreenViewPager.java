@@ -28,86 +28,13 @@ import java.util.Date;
 public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements View.OnClickListener {
 
 
-    private Handler handler = handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            String str = (String)msg.obj;
-            String[] strData = str.split(" ");
-            tv_time1.setText(strData[1]);
 
-            String wek = "";
-            String moh = "";
-            switch (msg.arg1){
-                case 0:
-                    wek = week[msg.arg1];
-                    break;
-                case 1:
-                    wek = week[msg.arg1];
-                    break;
-                case 2:
-                    wek = week[msg.arg1];
-                    break;
-                case 3:
-                    wek = week[msg.arg1];
-                    break;
-                case 4:
-                    wek = week[msg.arg1];
-                    break;
-                case 5:
-                    wek = week[msg.arg1];
-                    break;
-                case 6:
-                    wek = week[msg.arg1];
-                    break;
-            }
-            switch (msg.arg2){
-                case 0:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 1:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 2:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 3:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 4:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 5:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 6:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 7:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 8:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 9:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 10:
-                    moh = mothun[msg.arg2];
-                    break;
-                case 11:
-                    moh = mothun[msg.arg2];
-                    break;
-            }
-
-            String arg = wek + ", " + moh + " " + strData[0];
-            tv_time2.setText(arg);
-        }
-    };
     private TextView tv_time1;
     private String[] week = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
     private String[] mothun = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
     private TextView tv_time2;
     private ImageView iv_menu;
+    private Handler handler;
 
     public FirstLockScreenViewPager(Activity context) {
         super(context);
@@ -115,6 +42,82 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
 
     @Override
     public View initView() {
+
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                String str = (String)msg.obj;
+                String[] strData = str.split(" ");
+                tv_time1.setText(strData[1]);
+
+                String wek = "";
+                String moh = "";
+                switch (msg.arg1){
+                    case 0:
+                        wek = week[msg.arg1];
+                        break;
+                    case 1:
+                        wek = week[msg.arg1];
+                        break;
+                    case 2:
+                        wek = week[msg.arg1];
+                        break;
+                    case 3:
+                        wek = week[msg.arg1];
+                        break;
+                    case 4:
+                        wek = week[msg.arg1];
+                        break;
+                    case 5:
+                        wek = week[msg.arg1];
+                        break;
+                    case 6:
+                        wek = week[msg.arg1];
+                        break;
+                }
+                switch (msg.arg2){
+                    case 0:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 1:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 2:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 3:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 4:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 5:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 6:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 7:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 8:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 9:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 10:
+                        moh = mothun[msg.arg2];
+                        break;
+                    case 11:
+                        moh = mothun[msg.arg2];
+                        break;
+                }
+
+                String arg = wek + ", " + moh + " " + strData[0];
+                tv_time2.setText(arg);
+            }
+        };
         View view = View.inflate(mContent, R.layout.viewpager_first, null);
         tv_time1 = (TextView) view.findViewById(R.id.tv_time1);
         tv_time2 = (TextView) view.findViewById(R.id.tv_time2);

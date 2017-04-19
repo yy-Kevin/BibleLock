@@ -1,5 +1,6 @@
 package com.shoplex.bible.biblelock;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,12 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shoplex.bible.biblelock.bean.Comment;
 import com.shoplex.bible.biblelock.databinding.ActivityImageCommentBinding;
+import com.shoplex.bible.biblelock.utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ import java.util.List;
  */
 
 public class ImageCommentActivity extends BaseCommentActivity {
+
     private ActivityImageCommentBinding binding;
     private List<LinearLayout> filpperList;
 
@@ -38,7 +42,7 @@ public class ImageCommentActivity extends BaseCommentActivity {
         initActionBar();
         binding.tvTextShare.setOnClickListener(this);
         binding.commentSend.setOnClickListener(this);
-
+        binding.tvImageComment.setOnClickListener(this);
 
         binding.vfViewfilpper.setInAnimation(this, R.anim.push_up_in);
         binding.vfViewfilpper.setOutAnimation(this, R.anim.push_up_out);
@@ -99,6 +103,34 @@ public class ImageCommentActivity extends BaseCommentActivity {
             // 发送完，清空输入框
             binding.commentContent.setText("");
             Toast.makeText(this, "评论成功！", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public void showEditText(){
+
+        binding.commentContent.setFocusable(true);
+        binding.commentContent.setFocusableInTouchMode(true);
+        binding.commentContent.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager)binding.commentContent.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(binding.commentContent, 0);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.comment_send:
+                this.sendComment();
+                break;
+            case R.id.tv_text_share:
+
+                TimeUtils.shareMsg(this,"","","","");
+                break;
+            case R.id.tv_image_comment:
+                showEditText();
+                break;
+
         }
     }
 }

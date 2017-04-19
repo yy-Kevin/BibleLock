@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:id="@+id/rl_verse"
+        android:layout_width="340dp"
+        android:layout_height="160dp"
+        android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
         android:background="#33000000">
 
@@ -28,4 +30,79 @@
             android:text="--Psalms 37:1-2" />
 
     </RelativeLayout>
-</LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_verse"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:id="@+id/rl_verse_more"
+            android:layout_width="340dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#33000000">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="more"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="6dp"
+                android:text="Sunday"
+                android:textColor="#55ffffff"
+                android:textSize="14dp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/rl_verse_more"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="-2dp"
+            android:src="@mipmap/option" />
+
+        <RelativeLayout
+            android:layout_width="340dp"
+            android:layout_height="160dp"
+            android:layout_above="@id/rl_verse_more"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:background="#33000000">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="8dp"
+                android:padding="4dp"
+                android:text="A psalm of DaVID. Don't worry about the wicked. Don't envy those who do wrong.For lke grass. they soon fade away. Like springtime flowers, they soon wither"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:paddingBottom="4dp"
+                android:paddingRight="4dp"
+                android:text="--Psalms 37:1-2" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
