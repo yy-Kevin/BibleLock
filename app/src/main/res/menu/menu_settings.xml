@@ -2,23 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#558899"
+
     tools:context="com.shoplex.wuxiamagic.ui.bookdetail.BookDetailActivity">
 
     <item
         android:id="@+id/action_setting"
         android:orderInCategory="100"
         android:title="Rate Us"
+        android:background="#558899"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_setting12"
         android:orderInCategory="100"
+        android:background="#558899"
+
         android:title="FeedBack"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_setting13"
         android:orderInCategory="100"
+        android:background="#558899"
+
         android:title="Settings"
         app:showAsAction="never" />
 </menu>

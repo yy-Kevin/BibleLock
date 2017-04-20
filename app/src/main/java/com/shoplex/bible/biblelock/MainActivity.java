@@ -5,13 +5,16 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (savedInstanceState == null) {
             initFragment();
         }
+
         //判断是否开启锁屏服务
         Intent intent = new Intent(MainActivity.this,ServiceActivity.class);
         boolean isChecked = (boolean) SharedPreferencesUtils.get(MainActivity.this,"isChecked",false);
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setNavigationIcon(null);
         actionBar.setTitle("");
         // 通过代码的方式 给三个小点 换图标
-        toolbar.setOverflowIcon(getDrawable(R.drawable.menu_icon));
+        toolbar.setOverflowIcon(this.getDrawable(R.drawable.menu_icon));
 //
 //        //初始化抽屉布局
 //        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
@@ -170,6 +174,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_settings, menu);
+        //怎么改啊 nilai
+
         return true;
     }
 
@@ -178,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (item.getItemId()){
             case R.id.action_setting:
 
-                View view = showPopwindow(R.layout.popwindow_rateus,Gravity.CENTER);
+                View view = showRateUsPopwindow(R.layout.popwindow_rateus,Gravity.CENTER);
                 RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingbar);
                 Object rating = SharedPreferencesUtils.get(MainActivity.this,"RATING",(float)0);
                 Log.i(TAG,"yuyao rating = " + rating);
@@ -253,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * 显示popupWindow
+     * 显示 退出的popupWindow
      */
     private View showPopwindow(int layout,int gravity) {
         // 利用layoutInflater获得View
@@ -265,11 +271,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         PopupWindow window = new PopupWindow(view);
         window.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         window.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        backgroundAlpha(0.4f);
+        backgroundAlpha(0.5f);
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         window.setFocusable(true);
 
-        window.setElevation(2);
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);
@@ -281,16 +286,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         window.showAtLocation(view,
                 gravity, 0, 0);
 
-//        // 这里检验popWindow里的button是否可以点击
-//        Button first = (Button) view.findViewById(R.id.first);
-//        first.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                System.out.println("第一个按钮被点击了");
-//            }
-//        });
+        //popWindow消失监听方法
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0f);
+                System.out.println("popWindow消失");
+            }
+        });
+        return view;
+    }
+
+    /**
+     * 显示 评论的popupWindow
+     */
+    private View showRateUsPopwindow(int layout,int gravity) {
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(layout, null);
+
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+
+        PopupWindow window = new PopupWindow(view);
+        window.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        window.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        backgroundAlpha(0.5f);
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(true);
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+        // 在底部显示
+        window.showAtLocation(view,
+                gravity, 0, 0);
 
         //popWindow消失监听方法
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {

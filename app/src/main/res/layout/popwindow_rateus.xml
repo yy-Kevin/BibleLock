@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="340dp"
     android:layout_height="200dp"
     android:elevation="2dp"
+
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:background="#fff">
@@ -16,6 +17,7 @@
         android:layout_height="wrap_content"
         android:numStars="5"
         android:rating="0"
+        android:progressTint="#ffd71b"
         android:stepSize="1" />
     
     <TextView

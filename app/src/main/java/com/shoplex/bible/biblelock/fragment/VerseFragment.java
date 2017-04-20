@@ -40,6 +40,7 @@ public class VerseFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(mActivity, MainActivity.class);
                 mActivity.startActivity(intent);
+                mActivity.finish();
             }
         });
         return view;
