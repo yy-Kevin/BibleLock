@@ -6,13 +6,11 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/fl_flamelayout_lock"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/lock_back">
+        android:layout_height="match_parent">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@mipmap/bg_lock0"
-
         tools:context="com.shoplex.bible.biblelock.MainActivity">
 
         <com.shoplex.bible.biblelock.viewpager.LockViewPager

@@ -6,13 +6,14 @@
 
     <RelativeLayout
         android:id="@+id/rl_verse"
-        android:layout_width="340dp"
+        android:layout_width="360dp"
         android:layout_height="160dp"
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
         android:background="#33000000">
 
         <TextView
+            android:textColor="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="8dp"
@@ -39,7 +40,7 @@
 
         <RelativeLayout
             android:id="@+id/rl_verse_more"
-            android:layout_width="340dp"
+            android:layout_width="360dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -75,7 +76,7 @@
             android:src="@mipmap/option" />
 
         <RelativeLayout
-            android:layout_width="340dp"
+            android:layout_width="360dp"
             android:layout_height="160dp"
             android:layout_above="@id/rl_verse_more"
             android:layout_centerHorizontal="true"
@@ -84,6 +85,7 @@
             android:background="#33000000">
 
             <TextView
+                android:textColor="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp"

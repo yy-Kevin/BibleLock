@@ -58,7 +58,7 @@ public class LockScreenActivity extends SwipeBackActivity {
         initData();
         viewPager.setAdapter(new LockScreenAdapter());
 
-        int back = (int) SharedPreferencesUtils.get(this,"BACKGROUND",R.drawable.lock_back);
+        int back = (int) SharedPreferencesUtils.get(this,"background",R.mipmap.bg_lock1);
         frameLayout.setBackgroundResource(back);
 
 

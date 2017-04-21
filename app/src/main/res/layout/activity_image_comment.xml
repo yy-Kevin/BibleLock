@@ -214,6 +214,8 @@
                     android:background="#94805c">
 
                     <EditText
+                        android:gravity="bottom"
+                        android:paddingBottom="2dp"
                         android:id="@+id/comment_Content"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"

@@ -26,6 +26,8 @@ public class WallpageFragment extends Fragment {
     private Activity mActivity;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
+    private int[] thumbnailDatas;
+    private int[] prototypeDatas;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,8 +41,13 @@ public class WallpageFragment extends Fragment {
         View view = View.inflate(mActivity, R.layout.viewpager_wallpager, null);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
-        final int[] datas = {R.drawable.wallpaper_2, R.mipmap.wallpaper_0000, R.mipmap.wallpaper_0000,R.mipmap.wallpaper_0000, R.mipmap.wallpaper_0000, R.mipmap.wallpaper_0000,
-                R.mipmap.wallpaper_8,R.mipmap.wallpaper_9,R.mipmap.wallpaper_10};
+        thumbnailDatas = new int[]{R.mipmap.wall1, R.mipmap.wall2, R.mipmap.wall3,R.mipmap.wall4, R.mipmap.wall5, R.mipmap.wall6,
+                R.mipmap.wall7,R.mipmap.wall8,R.mipmap.wall9,R.mipmap.wall10};
+
+        prototypeDatas = new int[]{R.mipmap.bg_lock1, R.mipmap.bg_lock2, R.mipmap.bg_lock3,R.mipmap.bg_lock4, R.mipmap.bg_lock5, R.mipmap.bg_lock6,
+                R.mipmap.bg_lock7,R.mipmap.bg_lock8,R.mipmap.bg_lock9,R.mipmap.bg_lock10};
+
+
         //创建默认的线性LayoutManager
         mLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -48,7 +55,7 @@ public class WallpageFragment extends Fragment {
         //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
         mRecyclerView.setHasFixedSize(true);
         //创建并设置Adapter
-        MyAdapter mAdapter = new MyAdapter(datas);
+        MyAdapter mAdapter = new MyAdapter(thumbnailDatas);
         mRecyclerView.setAdapter(mAdapter);
 
         mLayoutManager = new GridLayoutManager(mActivity, 2);
@@ -58,8 +65,9 @@ public class WallpageFragment extends Fragment {
             @Override
             public void onItemClick(View view, int data) {
                 LockScreenActivity activity = (LockScreenActivity)mActivity;
-                activity.getFrameLayout().setBackgroundResource(datas[data]);
-                SharedPreferencesUtils.put(getActivity(),"BACKGROUND",(int)datas[data]);
+                activity.getFrameLayout().setBackgroundResource(prototypeDatas[data]);
+
+                SharedPreferencesUtils.put(mActivity,"background",(int) prototypeDatas[data]);
             }
         });
 

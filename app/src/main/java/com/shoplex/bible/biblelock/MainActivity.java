@@ -5,16 +5,14 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,11 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //判断是否开启锁屏服务
-        Intent intent = new Intent(MainActivity.this,ServiceActivity.class);
-        boolean isChecked = (boolean) SharedPreferencesUtils.get(MainActivity.this,"isChecked",false);
-        if (isChecked){
+        Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
+        boolean isChecked = (boolean) SharedPreferencesUtils.get(MainActivity.this, "isChecked", false);
+        if (isChecked) {
             startService(intent);
-        }else {
+        } else {
             stopService(intent);
         }
 
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void initView(){
+    private void initView() {
 //        setContentView(R.layout.activity_main);
         toolbar = (Toolbar) this.findViewById(R.id.toolbar);
         ib_toolbar = (ImageView) toolbar.findViewById(R.id.ib_toolbar);
@@ -92,10 +90,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         actionBar = getSupportActionBar();
         //在二级界面等Activity中，通过如下设置可以在Toolbar左边显示一个返回按钮：
         actionBar.setDisplayHomeAsUpEnabled(true);
+        //去掉第一个界面的 toolbar返回按钮
         toolbar.setNavigationIcon(null);
         actionBar.setTitle("");
         // 通过代码的方式 给三个小点 换图标
-        toolbar.setOverflowIcon(this.getDrawable(R.drawable.menu_icon));
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.menu_icon));
 //
 //        //初始化抽屉布局
 //        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
-    private void initFragment(){
+    private void initFragment() {
         imageFragment = new ImageFragment();
         getFragmentManager().beginTransaction().replace(R.id.fl_content, imageFragment).commit();
     }
@@ -136,8 +135,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 isExit = false;
                 break;
             case R.id.ib_toolbar:
-                Log.i(TAG,"yuyao ib_toolbar");
-                ToastUtil.showToast(this,"此处是广告位");
+                Log.i(TAG, "yuyao ib_toolbar");
+                ToastUtil.showToast(this, "此处是广告位");
                 break;
         }
         // 事务提交
@@ -181,13 +180,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        Intent intent;
+        switch (item.getItemId()) {
+            // 星星评论
             case R.id.action_setting:
-
-                View view = showRateUsPopwindow(R.layout.popwindow_rateus,Gravity.CENTER);
+                View view = showRateUsPopwindow(R.layout.popwindow_rateus, Gravity.CENTER);
                 RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingbar);
-                Object rating = SharedPreferencesUtils.get(MainActivity.this,"RATING",(float)0);
-                Log.i(TAG,"yuyao rating = " + rating);
+                Object rating = SharedPreferencesUtils.get(MainActivity.this, "RATING", (float) 0);
                 ratingBar.setRating((float) rating);
 
                 ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -195,18 +194,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                         ToastUtil.showToast(MainActivity.this, "评价了" + rating + "星");
-                        SharedPreferencesUtils.put(MainActivity.this,"RATING",rating);
+                        SharedPreferencesUtils.put(MainActivity.this, "RATING", rating);
                     }
                 });
 
                 break;
 
+            // 反馈信息
             case R.id.action_setting12:
-
+                intent = new Intent(this, FeedBackActivity.class);
+                startActivity(intent);
                 break;
-
+            // 设置信息
             case R.id.action_setting13:
-                Intent intent = new Intent(this,SettingActivity.class);
+                intent = new Intent(this, SettingActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -215,9 +216,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 无限旋转的Button 点击弹出广告
+     *
      * @param view
      */
-    public void startAnimation(View view){
+    public void startAnimation(View view) {
         operatingAnim = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         LinearInterpolator lin = new LinearInterpolator();
         operatingAnim.setInterpolator(lin);
@@ -228,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onDestroy() {
-        if (operatingAnim != null){
+        if (operatingAnim != null) {
             operatingAnim.cancel();
             operatingAnim = null;
         }
@@ -251,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void exitBy2Click() {
         if (!isExit) {
             isExit = true;
-            showPopwindow(R.layout.popwindow_exit,Gravity.BOTTOM);
+            showPopwindow(R.layout.popwindow_exit, Gravity.BOTTOM);
         } else {
             finish();
             System.exit(0);
@@ -261,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 显示 退出的popupWindow
      */
-    private View showPopwindow(int layout,int gravity) {
+    private View showPopwindow(int layout, int gravity) {
         // 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layout, null);
@@ -301,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 显示 评论的popupWindow
      */
-    private View showRateUsPopwindow(int layout,int gravity) {
+    private View showRateUsPopwindow(int layout, int gravity) {
         // 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layout, null);
@@ -340,10 +342,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 设置添加屏幕的背景透明度
+     *
      * @param bgAlpha
      */
-    public void backgroundAlpha(float bgAlpha)
-    {
+    public void backgroundAlpha(float bgAlpha) {
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0
         getWindow().setAttributes(lp);

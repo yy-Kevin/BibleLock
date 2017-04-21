@@ -182,12 +182,14 @@
                         android:background="#94805c">
 
                         <EditText
+
                             android:id="@+id/edittext_comment"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_gravity="center_vertical"
                             android:background="#94805c"
-                            android:gravity="center_vertical"
+                            android:gravity="bottom"
+                            android:paddingBottom="2dp"
                             android:hint="add Comment"
                             android:paddingLeft="6dp" />
 
