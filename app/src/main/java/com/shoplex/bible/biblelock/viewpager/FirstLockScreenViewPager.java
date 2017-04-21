@@ -1,10 +1,12 @@
 package com.shoplex.bible.biblelock.viewpager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,11 +16,14 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.shoplex.bible.biblelock.ClearActivity;
 import com.shoplex.bible.biblelock.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.shoplex.bible.biblelock.server.ServiceActivity.TAG;
 
 
 /**
@@ -28,13 +33,13 @@ import java.util.Date;
 public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements View.OnClickListener {
 
 
-
     private TextView tv_time1;
-    private String[] week = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
-    private String[] mothun = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+    private String[] week = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    private String[] mothun = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     private TextView tv_time2;
     private ImageView iv_menu;
     private Handler handler;
+    private ImageView iv_lock_clear;
 
     public FirstLockScreenViewPager(Activity context) {
         super(context);
@@ -43,16 +48,16 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
     @Override
     public View initView() {
 
-        handler = new Handler(){
+        handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                String str = (String)msg.obj;
+                String str = (String) msg.obj;
                 String[] strData = str.split(" ");
                 tv_time1.setText(strData[1]);
 
                 String wek = "";
                 String moh = "";
-                switch (msg.arg1){
+                switch (msg.arg1) {
                     case 0:
                         wek = week[msg.arg1];
                         break;
@@ -75,7 +80,7 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
                         wek = week[msg.arg1];
                         break;
                 }
-                switch (msg.arg2){
+                switch (msg.arg2) {
                     case 0:
                         moh = mothun[msg.arg2];
                         break;
@@ -122,10 +127,11 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
         tv_time1 = (TextView) view.findViewById(R.id.tv_time1);
         tv_time2 = (TextView) view.findViewById(R.id.tv_time2);
         iv_menu = (ImageView) view.findViewById(R.id.iv_menu);
+        iv_lock_clear = (ImageView) view.findViewById(R.id.iv_lock_clear);
 
 
         ImageView tv = (ImageView) view.findViewById(R.id.iv_wifi);
-        int[] res = {R.drawable.cehua1,R.drawable.cehua3,R.drawable.cehua};
+        int[] res = {R.drawable.cehua1, R.drawable.cehua3, R.drawable.cehua};
 
         iv_menu.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -138,105 +144,113 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
                         break;
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
-                        viewGroup .requestDisallowInterceptTouchEvent(false);
+                        viewGroup.requestDisallowInterceptTouchEvent(false);
                         break;
                 }
-                return  false;
+                return false;
             }
         });
         iv_menu.setOnClickListener(this);
+        iv_lock_clear.setOnClickListener(this);
 
         initTime();
         return view;
     }
 
 
-
-    public void initTime(){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        while(true){
-                            SimpleDateFormat sdf=new SimpleDateFormat("dd HH:mm");
+    public void initTime() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd HH:mm");
 //                            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            Message msg = new Message();
-                            msg.obj=sdf.format(new Date());
+                        Message msg = new Message();
+                        msg.obj = sdf.format(new Date());
 
-                            Calendar c = Calendar.getInstance();
-                            int mMonth = c.get(Calendar.MONTH);//获取当前月份;
-                            int mWeek = c.get(Calendar.DAY_OF_WEEK);//获取周;
-                            if (Calendar.MONDAY == mWeek){
-                                msg.arg1 = 0;
-                            } else if (Calendar.TUESDAY == mWeek){
-                                msg.arg1 = 1;
-                            } else if (Calendar.WEDNESDAY == mWeek){
-                                msg.arg1 = 2;
-                            } else if (Calendar.THURSDAY == mWeek){
-                                msg.arg1 = 3;
-                            } else if (Calendar.FRIDAY == mWeek){
-                                msg.arg1 = 4;
-                            } else if (Calendar.SATURDAY == mWeek){
-                                msg.arg1 = 5;
-                            }else if (Calendar.SUNDAY == mWeek){
-                                msg.arg1 = 6;
-                            }
-                            switch (mMonth){
-                                case Calendar.JANUARY:
-                                    msg.arg2 = 0;
-                                    break;
-                                case Calendar.FEBRUARY:
-                                    msg.arg2 = 1;
-                                    break;
-                                case Calendar.MARCH:
-                                    msg.arg2 = 2;
-                                    break;
-                                case Calendar.APRIL:
-                                    msg.arg2 = 3;
-                                    break;
-                                case Calendar.MAY:
-                                    msg.arg2 = 4;
-                                    break;
-                                case Calendar.JUNE:
-                                    msg.arg2 = 5;
-                                    break;
-                                case Calendar.JULY:
-                                    msg.arg2 = 6;
-                                    break;
-                                case Calendar.AUGUST:
-                                    msg.arg2 = 7;
-                                    break;
-                                case Calendar.SEPTEMBER:
-                                    msg.arg2 = 8;
-                                    break;
-                                case Calendar.OCTOBER:
-                                    msg.arg2 = 9;
-                                    break;
-                                case Calendar.NOVEMBER:
-                                    msg.arg2 = 10;
-                                    break;
-                                case Calendar.DECEMBER:
-                                    msg.arg2 = 11;
-                                    break;
-                            }
-
-                            handler.sendMessage(handler.obtainMessage(100,msg.arg1,msg.arg2,msg.obj));
-
-                            Thread.sleep(1000*60);
+                        Calendar c = Calendar.getInstance();
+                        int mMonth = c.get(Calendar.MONTH);//获取当前月份;
+                        int mWeek = c.get(Calendar.DAY_OF_WEEK);//获取周;
+                        if (Calendar.MONDAY == mWeek) {
+                            msg.arg1 = 0;
+                        } else if (Calendar.TUESDAY == mWeek) {
+                            msg.arg1 = 1;
+                        } else if (Calendar.WEDNESDAY == mWeek) {
+                            msg.arg1 = 2;
+                        } else if (Calendar.THURSDAY == mWeek) {
+                            msg.arg1 = 3;
+                        } else if (Calendar.FRIDAY == mWeek) {
+                            msg.arg1 = 4;
+                        } else if (Calendar.SATURDAY == mWeek) {
+                            msg.arg1 = 5;
+                        } else if (Calendar.SUNDAY == mWeek) {
+                            msg.arg1 = 6;
                         }
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        switch (mMonth) {
+                            case Calendar.JANUARY:
+                                msg.arg2 = 0;
+                                break;
+                            case Calendar.FEBRUARY:
+                                msg.arg2 = 1;
+                                break;
+                            case Calendar.MARCH:
+                                msg.arg2 = 2;
+                                break;
+                            case Calendar.APRIL:
+                                msg.arg2 = 3;
+                                break;
+                            case Calendar.MAY:
+                                msg.arg2 = 4;
+                                break;
+                            case Calendar.JUNE:
+                                msg.arg2 = 5;
+                                break;
+                            case Calendar.JULY:
+                                msg.arg2 = 6;
+                                break;
+                            case Calendar.AUGUST:
+                                msg.arg2 = 7;
+                                break;
+                            case Calendar.SEPTEMBER:
+                                msg.arg2 = 8;
+                                break;
+                            case Calendar.OCTOBER:
+                                msg.arg2 = 9;
+                                break;
+                            case Calendar.NOVEMBER:
+                                msg.arg2 = 10;
+                                break;
+                            case Calendar.DECEMBER:
+                                msg.arg2 = 11;
+                                break;
+                        }
+
+                        handler.sendMessage(handler.obtainMessage(100, msg.arg1, msg.arg2, msg.obj));
+
+                        Thread.sleep(1000 * 60);
                     }
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-            }).start();
-        }
+            }
+        }).start();
+    }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        Log.i(TAG,"yuyao iv_lock_clear1111" );
+
+        switch (v.getId()) {
             case R.id.iv_menu:
                 showPopUp(iv_menu);
+                break;
+            case R.id.iv_lock_clear:
+                Log.i(TAG,"yuyao iv_lock_clear2222" );
+                Intent intent = new Intent(mContent, ClearActivity.class);
+                mContent.startActivity(intent);
+
                 break;
         }
     }
@@ -252,7 +266,7 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
         layout.setGravity(Gravity.CENTER_HORIZONTAL);
         layout.addView(tv);
 
-        PopupWindow popupWindow = new PopupWindow(layout,140,80);
+        PopupWindow popupWindow = new PopupWindow(layout, 140, 80);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

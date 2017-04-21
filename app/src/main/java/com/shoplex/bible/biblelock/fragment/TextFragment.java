@@ -5,7 +5,10 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +26,11 @@ import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.TextCommentActivity;
 import com.shoplex.bible.biblelock.adapter.TextFragmentAdapter;
 import com.shoplex.bible.biblelock.bean.Comment;
+import com.shoplex.bible.biblelock.utils.ToastUtil;
 
 import java.util.ArrayList;
+
+import static com.shoplex.bible.biblelock.server.ServiceActivity.TAG;
 
 /**
  * Created by qsk on 2017/3/28.
@@ -45,6 +51,8 @@ public class TextFragment extends Fragment implements View.OnClickListener {
     private View popup;
     private View view;
     private Activity mActivity;
+    private FloatingActionButton fab_action;
+    private SwipeRefreshLayout mSwipeRefresh;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,7 +64,8 @@ public class TextFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = View.inflate(mActivity, R.layout.fragment_text, null);
-
+        fab_action = (FloatingActionButton) view.findViewById(R.id.fab_action_text);
+        mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.id_swipe_text);
 
         popup = View.inflate(mActivity, R.layout.popupwindow,null);
         lv_fragment_text = (ListView) view.findViewById(R.id.lv_fragment_text);
@@ -87,6 +96,31 @@ public class TextFragment extends Fragment implements View.OnClickListener {
         lv_fragment_text.setAdapter(textAdapter);
         hide_down.setOnClickListener(this);
         hide_down.setOnClickListener(this);
+
+        fab_action.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showToast(mActivity,"这是广告位置");
+                fab_action.setVisibility(View.GONE);
+            }
+        });
+
+
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i(TAG,"下拉刷新成功");
+                        // 停止刷新
+
+                        mSwipeRefresh.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
+
 
         textAdapter.setOnclicListener(new TextFragmentAdapter.onClickListener() {
             @Override

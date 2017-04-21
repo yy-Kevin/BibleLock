@@ -66,7 +66,7 @@ public class SettingActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case 16908332:
+            case android.R.id.home:
                 finish();
                 break;
         }

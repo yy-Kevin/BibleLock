@@ -24,6 +24,7 @@
         </activity>
 
         <activity android:name=".FeedBackActivity"></activity>
+        <activity android:name=".ClearActivity"></activity>
         <activity android:name=".TextCommentActivity"></activity>
         <activity android:name=".ImageCommentActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>

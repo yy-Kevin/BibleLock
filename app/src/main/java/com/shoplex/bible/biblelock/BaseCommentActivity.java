@@ -88,7 +88,7 @@ public class BaseCommentActivity extends AppCompatActivity implements View.OnCli
     public boolean onOptionsItemSelected(MenuItem item) {
         item.getItemId();
         switch (item.getItemId()) {
-            case 16908332:
+            case android.R.id.home:
                 finish();
                 break;
         }
