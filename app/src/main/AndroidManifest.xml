@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shoplex.bible.biblelock">
 
-    <uses-permission android:name = "android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -12,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -26,18 +29,28 @@
         <activity android:name=".FeedBackActivity"></activity>
         <activity android:name=".ClearActivity"></activity>
         <activity android:name=".TextCommentActivity"></activity>
-        <activity android:name=".ImageCommentActivity"
+        <activity
+            android:name=".ImageCommentActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
-        <activity android:name=".SettingActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".LockScreenActivity"
-            android:launchMode="singleInstance"
+        <activity
+            android:name=".LockScreenActivity"
             android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
             android:taskAffinity="com.example.suoping.lockscreen"></activity>
 
-        <service android:name=".server.ServiceActivity"/>
+        <service android:name=".server.ServiceActivity" />
+        <!--<receiver android:name=".server.BatteryBroadcastReciver"/>-->
+        <meta-data
+            android:name="design_width"
+            android:value="1080"></meta-data>
+        <meta-data
+            android:name="design_height"
+            android:value="1920"></meta-data>
+
     </application>
 
 

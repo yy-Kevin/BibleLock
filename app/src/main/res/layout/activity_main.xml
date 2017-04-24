@@ -21,11 +21,11 @@
             android:layout_below="@id/include"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="15dp">
+            android:paddingTop="45px">
 
             <Button
                 android:id="@+id/btv_image"
-                android:layout_width="150dp"
+                android:layout_width="450px"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_select"
                 android:text="Image"
@@ -35,7 +35,7 @@
 
             <Button
                 android:id="@+id/btv_text"
-                android:layout_width="150dp"
+                android:layout_width="450px"
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_button_select"
                 android:text="Text"
@@ -51,7 +51,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/ll_button_select"
             android:background="#22ffffff"
-            android:paddingTop="10dp"></FrameLayout>
+            android:paddingTop="30px"></FrameLayout>
 
     </RelativeLayout>
 </layout>

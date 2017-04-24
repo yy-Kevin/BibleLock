@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -35,10 +34,12 @@ import com.shoplex.bible.biblelock.databinding.ActivityMainBinding;
 import com.shoplex.bible.biblelock.fragment.ImageFragment;
 import com.shoplex.bible.biblelock.fragment.TextFragment;
 import com.shoplex.bible.biblelock.server.ServiceActivity;
+import com.shoplex.bible.biblelock.utils.DensityUtil;
 import com.shoplex.bible.biblelock.utils.SharedPreferencesUtils;
 import com.shoplex.bible.biblelock.utils.ToastUtil;
+import com.zhy.autolayout.AutoLayoutActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AutoLayoutActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
     private ImageFragment imageFragment;
@@ -56,7 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        int i1 = DensityUtil.dip2px(this,360);
+        int i2 = DensityUtil.dip2px(this,640);
 
+        Log.i(TAG,"i1 ==========="  + i1 );
+        Log.i(TAG,"i2 ==========="  + i2 );
         initView();
         if (savedInstanceState == null) {
             initFragment();

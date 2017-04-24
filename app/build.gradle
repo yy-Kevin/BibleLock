@@ -28,11 +28,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
+    //水波纹效果
+    compile 'com.romainpiel.shimmer:library:1.4.0@aar'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'cn.bingoogolapple:bga-swipebacklayout:1.0.8'
     compile 'com.android.support:appcompat-v7:24.2.0'
-
+    //屏幕适配
+    compile 'com.zhy:autolayout:1.4.5'
+    compile 'com.zhy:autolayout:1.4.5'
     compile 'com.android.support:design:24.2.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:support-v4:25.2.0'

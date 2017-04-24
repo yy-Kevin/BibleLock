@@ -8,14 +8,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.romainpiel.shimmer.Shimmer;
+import com.romainpiel.shimmer.ShimmerTextView;
 import com.shoplex.bible.biblelock.ClearActivity;
 import com.shoplex.bible.biblelock.R;
 
@@ -40,6 +40,8 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
     private ImageView iv_menu;
     private Handler handler;
     private ImageView iv_lock_clear;
+    private ShimmerTextView myShimmerTextView;
+    private Shimmer shimmer;
 
     public FirstLockScreenViewPager(Activity context) {
         super(context);
@@ -127,29 +129,40 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
         tv_time1 = (TextView) view.findViewById(R.id.tv_time1);
         tv_time2 = (TextView) view.findViewById(R.id.tv_time2);
         iv_menu = (ImageView) view.findViewById(R.id.iv_menu);
+        myShimmerTextView = (ShimmerTextView) view.findViewById(R.id.shimmer_tv);
         iv_lock_clear = (ImageView) view.findViewById(R.id.iv_lock_clear);
 
-
+        shimmer = new Shimmer();
+        shimmer.start(myShimmerTextView);
+//        shimmer.setRepeatCount(0)
+//                .setDuration(500)
+//                .setStartDelay(300)
+//                .setDirection(Shimmer.ANIMATION_DIRECTION_RTL)
+//                .setAnimatorListener(new Animator.AnimatorListener(){
+//
+//                    @Override
+//                    public void onAnimationStart(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationCancel(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationRepeat(Animator animation) {
+//
+//                    }
+//                });
         ImageView tv = (ImageView) view.findViewById(R.id.iv_wifi);
         int[] res = {R.drawable.cehua1, R.drawable.cehua3, R.drawable.cehua};
 
-        iv_menu.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                ViewGroup viewGroup = (ViewGroup) v.getParent();
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_MOVE:
-                        viewGroup.requestDisallowInterceptTouchEvent(true);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        viewGroup.requestDisallowInterceptTouchEvent(false);
-                        break;
-                }
-                return false;
-            }
-        });
         iv_menu.setOnClickListener(this);
         iv_lock_clear.setOnClickListener(this);
 
@@ -163,6 +176,8 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
             @Override
             public void run() {
                 try {
+
+
                     while (true) {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd HH:mm");
 //                            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
