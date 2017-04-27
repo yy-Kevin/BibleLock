@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.bean.Comment;
 import com.shoplex.bible.biblelock.utils.TimeUtils;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
 
@@ -65,6 +66,7 @@ public class TextFragmentAdapter extends BaseAdapter implements View.OnClickList
             holder.tv_text_share = (TextView) convertView.findViewById(R.id.tv_text_share);
             holder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
             convertView.setTag(holder);
+            AutoUtils.autoSize(convertView);
         } else {
             holder = (TextHolder) convertView.getTag();
         }
@@ -81,7 +83,7 @@ public class TextFragmentAdapter extends BaseAdapter implements View.OnClickList
         });
 
         if (position ==1 || position ==2){
-            holder.tv_text_like.setEnabled(false);
+//            holder.tv_text_like.setEnabled(false);
         }
         holder.tv_text_like.setOnClickListener(this);
         holder.tv_text_share.setOnClickListener(this);

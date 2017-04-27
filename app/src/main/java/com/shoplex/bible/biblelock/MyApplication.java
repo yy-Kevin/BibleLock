@@ -2,6 +2,8 @@ package com.shoplex.bible.biblelock;
 
 import android.app.Application;
 
+import com.zhy.autolayout.config.AutoLayoutConifg;
+
 /**
  * Created by qsk on 2017/4/17.
  */
@@ -14,6 +16,7 @@ public class MyApplication extends Application{
     public void onCreate() {
         super.onCreate();
         this.instance = this;
+        AutoLayoutConifg.getInstance().useDeviceSize();
     }
 
 

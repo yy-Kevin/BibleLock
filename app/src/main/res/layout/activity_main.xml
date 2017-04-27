@@ -25,8 +25,9 @@
 
             <Button
                 android:id="@+id/btv_image"
-                android:layout_width="450px"
-                android:layout_height="wrap_content"
+                android:layout_width="320px"
+                android:layout_height="120px"
+                android:layout_marginLeft="230px"
                 android:background="@drawable/button_select"
                 android:text="Image"
                 android:textAllCaps="false"
@@ -35,8 +36,9 @@
 
             <Button
                 android:id="@+id/btv_text"
-                android:layout_width="450px"
-                android:layout_height="wrap_content"
+                android:layout_width="320px"
+                android:layout_height="120px"
+                android:layout_marginRight="230px"
                 android:background="@drawable/text_button_select"
                 android:text="Text"
                 android:textAllCaps="false"
