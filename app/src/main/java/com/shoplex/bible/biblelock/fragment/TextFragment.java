@@ -125,15 +125,7 @@ public class TextFragment extends Fragment implements View.OnClickListener {
         textAdapter.setOnclicListener(new TextFragmentAdapter.onClickListener() {
             @Override
             public void onItemClick(int postition) {
-                Log.i("当前被编辑条目位置", postition+"");
-//                popupWindow.showAtLocation(lv_fragment_text, Gravity.BOTTOM,0,0);
-//                InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-
-                Intent intent = new Intent(mActivity, TextCommentActivity.class);
-                intent.putExtra("postition" ,postition);
-                mActivity.startActivityForResult(intent,0);
-
+                Log.i(TAG, "like like");
 
             }
         });

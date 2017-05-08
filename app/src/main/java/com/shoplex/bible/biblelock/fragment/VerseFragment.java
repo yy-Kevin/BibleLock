@@ -19,7 +19,6 @@ import com.shoplex.bible.biblelock.R;
 
 public class VerseFragment extends Fragment {
 
-
     private Activity mActivity;
 
     @Override
@@ -45,6 +44,5 @@ public class VerseFragment extends Fragment {
         });
         return view;
     }
-
 
 }

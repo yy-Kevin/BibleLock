@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.shoplex.bible.biblelock.ImageCommentActivity;
+import com.shoplex.bible.biblelock.MainActivity;
 import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.adapter.ImageFragmentAdapter;
 import com.shoplex.bible.biblelock.api.ApiManager;
@@ -85,6 +87,9 @@ public class ImageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ToastUtil.showToast(mActivity,"这是广告位置");
+                MainActivity mainActivity = (MainActivity) mActivity;
+                View view = mainActivity.showPopwindowad(R.layout.popupwindow_ad, Gravity.CENTER);
+                mainActivity.showNativeAd(view);
                 fab_action.setVisibility(View.GONE);
             }
         });

@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,8 +21,6 @@ import com.shoplex.bible.biblelock.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import static com.shoplex.bible.biblelock.server.ServiceActivity.TAG;
 
 
 /**
@@ -176,8 +173,6 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
             @Override
             public void run() {
                 try {
-
-
                     while (true) {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd HH:mm");
 //                            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -255,21 +250,22 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
 
     @Override
     public void onClick(View v) {
-        Log.i(TAG,"yuyao iv_lock_clear1111" );
 
         switch (v.getId()) {
             case R.id.iv_menu:
                 showPopUp(iv_menu);
                 break;
             case R.id.iv_lock_clear:
-                Log.i(TAG,"yuyao iv_lock_clear2222" );
                 Intent intent = new Intent(mContent, ClearActivity.class);
                 mContent.startActivity(intent);
-
                 break;
         }
     }
 
+    /**
+     * 锁屏界面返回Back
+     * @param v
+     */
     private void showPopUp(View v) {
         LinearLayout layout = new LinearLayout(mContent);
         layout.setBackgroundColor(Color.GRAY);
@@ -280,8 +276,7 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
         tv.setTextColor(Color.WHITE);
         layout.setGravity(Gravity.CENTER_HORIZONTAL);
         layout.addView(tv);
-
-        PopupWindow popupWindow = new PopupWindow(layout, 140, 80);
+        PopupWindow popupWindow = new PopupWindow(layout, 140, 60);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -291,10 +286,8 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
         int[] location = new int[2];
         v.getLocationOnScreen(location);
-
         popupWindow.showAsDropDown(v, -100, 0);
     }
 

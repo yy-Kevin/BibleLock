@@ -1,16 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:layout_margin="5dp"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
 
-    <!-- 这里的linearLayout加android:background=""这个属性要谨慎，如果加了后，popwindow是不能半透明了的 -->
-
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="320dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp">
 
-    </FrameLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/native_ad_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/native_ad_container"
+            android:layout_margin="10dp"
+            android:text="Smart Charge"
+            android:textColor="#fff" />
+
+        <ToggleButton
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/native_ad_container"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:button="@drawable/btn_backgrounds"
+            android:checked="false"
+            android:textOff=""
+            android:textOn="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_margin="10dp"
+            android:text="Display the current chargeing status, and sponsors’ "
+            android:textColor="#fff" />
+    </RelativeLayout>
+</RelativeLayout>

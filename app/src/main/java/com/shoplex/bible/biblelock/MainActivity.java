@@ -25,19 +25,32 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdChoicesView;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.MediaView;
+import com.facebook.ads.NativeAd;
 import com.shoplex.bible.biblelock.databinding.ActivityMainBinding;
 import com.shoplex.bible.biblelock.fragment.ImageFragment;
 import com.shoplex.bible.biblelock.fragment.TextFragment;
 import com.shoplex.bible.biblelock.server.ServiceActivity;
-import com.shoplex.bible.biblelock.utils.DensityUtil;
 import com.shoplex.bible.biblelock.utils.SharedPreferencesUtils;
 import com.shoplex.bible.biblelock.utils.ToastUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AutoLayoutActivity implements View.OnClickListener {
 
@@ -50,6 +63,8 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
     private RotateAnimation operatingAnim;
     private boolean isExit;
     private ActivityMainBinding binding;
+    private NativeAd nativeAd;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +72,14 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        int i1 = DensityUtil.dip2px(this,360);
-        int i2 = DensityUtil.dip2px(this,640);
-
-        Log.i(TAG,"i1 ==========="  + i1 );
-        Log.i(TAG,"i2 ==========="  + i2 );
         initView();
+
         if (savedInstanceState == null) {
             initFragment();
         }
 
         //判断是否开启锁屏服务
-        Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
+        intent = new Intent(MainActivity.this, ServiceActivity.class);
         boolean isChecked = (boolean) SharedPreferencesUtils.get(MainActivity.this, "isChecked", false);
         if (isChecked) {
             startService(intent);
@@ -140,14 +151,96 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
                 isExit = false;
                 break;
             case R.id.ib_toolbar:
-                Log.i(TAG, "yuyao ib_toolbar");
-                ToastUtil.showToast(this, "此处是广告位");
+
+                View view = showPopwindowad(R.layout.popupwindow_ad,Gravity.CENTER);
+                showNativeAd(view);
+
                 break;
         }
         // 事务提交
         transaction.commit();
     }
+    public void showNativeAd(final View view) {
+        Log.i(TAG,"1848266248745233  ");
 
+        nativeAd = new NativeAd(this, "YOUR_PLACEMENT_ID");
+        nativeAd.loadAd();
+
+        nativeAd.setAdListener(new AdListener() {
+
+            @Override
+            public void onError(Ad ad, AdError error) {
+                // Ad error callback
+
+                Log.i(TAG,"onError onError " + error.toString());
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+
+                Log.i(TAG,"1848266248745233 1848266248745233 ");
+                if (nativeAd != null ) {
+                    nativeAd.unregisterView();
+                }
+
+                // Add the Ad view into the ad container.
+                LinearLayout nativeAdContainer = (LinearLayout) view.findViewById(R.id.native_ad_container);
+                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+                // Inflate the Ad view.  The layout referenced should be the one you created in the last step.
+                LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.activity_ad, nativeAdContainer, false);
+                nativeAdContainer.addView(adView);
+
+                // Create native UI using the ad metadata.
+                ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+                TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+                MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+                TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+                TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+                Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+
+                // Set the Text.
+                nativeAdTitle.setText(nativeAd.getAdTitle());
+                nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+                nativeAdBody.setText(nativeAd.getAdBody());
+                nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
+
+                // Download and display the ad icon.
+                NativeAd.Image adIcon = nativeAd.getAdIcon();
+                NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
+
+                // Download and display the cover image.
+                nativeAdMedia.setNativeAd(nativeAd);
+
+                // Add the AdChoices icon
+                LinearLayout adChoicesContainer = (LinearLayout) adView.findViewById(R.id.ad_choices_container);
+                AdChoicesView adChoicesView = new AdChoicesView(MainActivity.this, nativeAd, true);
+                adChoicesContainer.addView(adChoicesView);
+
+                // Register the Title and CTA button to listen for clicks.
+                List<View> clickableViews = new ArrayList<>();
+                clickableViews.add(nativeAdTitle);
+                clickableViews.add(nativeAdCallToAction);
+                nativeAd.registerViewForInteraction(nativeAdContainer,clickableViews);
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                Log.i(TAG,"onAdClicked onAdClicked ");
+                // Ad clicked callback
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                Log.i(TAG,"onLoggingImpression onLoggingImpression ");
+
+
+            }
+        });
+
+//        nativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
+    }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -258,7 +351,34 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
     private void exitBy2Click() {
         if (!isExit) {
             isExit = true;
-            showPopwindow(R.layout.popwindow_exit, Gravity.BOTTOM);
+            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.popwindow_exit, null);
+            ToggleButton viewById = (ToggleButton) view.findViewById(R.id.switch1);
+
+            boolean isChecked = (boolean) SharedPreferencesUtils.get(MainActivity.this,"isChecked",false);
+            if (isChecked){
+                viewById.setChecked(true);
+            }else {
+                viewById.setChecked(false);
+            }
+
+            showPopwindow(view, Gravity.BOTTOM);
+            showNativeAd(view);
+
+            viewById.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Log.i(TAG,"isChecked = " + isChecked);
+                    if (isChecked){
+                        startService(intent);
+                        SharedPreferencesUtils.put(MainActivity.this,"isChecked",isChecked);
+                    }else {
+                        stopService(intent);
+                        SharedPreferencesUtils.put(MainActivity.this,"isChecked",isChecked);
+                    }
+                }
+            });
+
         } else {
             finish();
             System.exit(0);
@@ -268,7 +388,46 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
     /**
      * 显示 退出的popupWindow
      */
-    private View showPopwindow(int layout, int gravity) {
+    private View showPopwindow(View view, int gravity) {
+        // 利用layoutInflater获得View
+//        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View view = inflater.inflate(layout, null);
+
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+
+        PopupWindow window = new PopupWindow(view,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+//        window.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+//        window.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        backgroundAlpha(0.5f);
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(true);
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+        // 在底部显示
+        window.showAtLocation(view,
+                gravity, 0, 0);
+
+        //popWindow消失监听方法
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0f);
+            }
+        });
+        return view;
+    }
+
+    /**
+     * 显示 广告的popupWindow
+     */
+    public View showPopwindowad(int layout, int gravity) {
         // 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layout, null);
@@ -299,7 +458,6 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
             @Override
             public void onDismiss() {
                 backgroundAlpha(1.0f);
-                System.out.println("popWindow消失");
             }
         });
         return view;

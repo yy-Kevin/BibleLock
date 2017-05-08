@@ -12,7 +12,15 @@ public class Comment {
     private int like;
     private int share;
     private int comment;
+    private boolean isLike;
 
+    public boolean isLike() {
+        return true;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
 
     public int getLike() {
         return like;

@@ -28,6 +28,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //广告位置
+    compile 'com.facebook.android:audience-network-sdk:4.+'
+
     //水波纹效果
     compile 'com.romainpiel.shimmer:library:1.4.0@aar'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

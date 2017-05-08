@@ -10,7 +10,9 @@
         android:orientation="vertical">
 
         <include layout="@layout/toolbar_image" />
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,7 +25,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="580dp"
+                    android:layout_height="wrap_content"
                     android:background="#ffffff">
 
                     <RelativeLayout
@@ -114,36 +116,23 @@
                         android:layout_marginTop="14dp"
                         android:background="@drawable/rectangle" />
 
-                    <android.support.design.widget.FloatingActionButton
 
-                        android:id="@+id/fab_action"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@id/iv_rectangle"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="-10dp"
-                        android:paddingRight="16dp"
-                        android:src="@drawable/checkmark"
-                        app:backgroundTint="#796033"
-                        app:elevation="6dp"
-                        app:pressedTranslationZ="12dp"
-                        app:rippleColor="#0ff" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="125dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@id/iv_rectangle"
                         android:layout_marginTop="10dp"
                         android:orientation="vertical"
                         android:paddingLeft="16dp"
+                        android:layout_marginBottom="13dp"
                         android:paddingRight="18dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Prayer"
+                            android:layout_marginBottom="8dp"
                             android:textColor="#000000"
                             android:textSize="18dp" />
 
@@ -156,7 +145,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:background="#fff">
 
@@ -206,7 +195,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_comment"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -237,7 +226,22 @@
             </LinearLayout>
 
         </ScrollView>
+            <android.support.design.widget.FloatingActionButton
 
+                android:id="@+id/fab_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/iv_rectangle"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="80dp"
+                android:src="@drawable/checkmark"
+                app:backgroundTint="#796033"
+                app:elevation="6dp"
+                app:pressedTranslationZ="12dp"
+                app:rippleColor="#0ff" />
+        </RelativeLayout>
 
     </LinearLayout>
 </layout>

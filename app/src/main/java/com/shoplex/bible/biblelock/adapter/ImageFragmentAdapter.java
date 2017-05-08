@@ -9,12 +9,16 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.shoplex.bible.biblelock.MainActivity;
 import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.bean.Comment;
 import com.shoplex.bible.biblelock.utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.shoplex.bible.biblelock.location.LoactionUrl.TYPE_COMPANY;
+import static com.shoplex.bible.biblelock.location.LoactionUrl.TYPE_TITLE;
 
 /**
  * Created by qsk on 2017/3/28.
@@ -25,12 +29,14 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
     private static final String TAG = "ImageFragmentAdapter";
     private ArrayList<Comment> mList;
     private Context mContext;
-    public static final int TYPE_TITLE = 0;
-    public static final int TYPE_COMPANY = 1;
+
+    private final MainActivity mainActivity;
 
     public ImageFragmentAdapter(Context context, ArrayList<Comment> list){
         mList = list;
         mContext = context;
+        mainActivity = (MainActivity) mContext;
+
     }
 
     @Override
@@ -102,7 +108,9 @@ public class ImageFragmentAdapter extends BaseAdapter implements View.OnClickLis
                 iHolder.tv_image_like.setOnClickListener(this);
                 break;
             case TYPE_TITLE:
+                Log.i(TAG,"showNativeAd ");
                 view  = View.inflate(mContext, R.layout.fragment_title_item,null);
+                mainActivity.showNativeAd(view);
 
                 break;
         }
