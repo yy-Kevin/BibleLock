@@ -98,16 +98,7 @@ public class TextFragmentAdapter extends BaseAdapter implements View.OnClickList
                 } else {
                     holder = (TextHolder) convertView.getTag();
                 }
-                final int finalPosition = position;
-                holder.tv_text_comment.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (listener != null) {
-                            listener.onItemClick(finalPosition);
 
-                        }
-                    }
-                });
                 holder.tv_text_like.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -133,11 +124,9 @@ public class TextFragmentAdapter extends BaseAdapter implements View.OnClickList
                 break;
         }
 
-
         if (position == 1 || position == 3) {
 //            holder.tv_text_like.setEnabled(true);
         }
-
 
         return convertView;
     }

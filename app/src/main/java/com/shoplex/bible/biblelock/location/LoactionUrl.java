@@ -9,4 +9,6 @@ public class LoactionUrl {
     public static final String API_SERVER = "https://api.beta.wuxiamagic.com/";
     public static final int TYPE_TITLE = 0;
     public static final int TYPE_COMPANY = 1;
+    public static final int MIN_CLICK_DELAY_TIME = 1000;
+
 }

@@ -131,33 +131,7 @@ public class FirstLockScreenViewPager extends BaseLockScreenViewPager implements
 
         shimmer = new Shimmer();
         shimmer.start(myShimmerTextView);
-//        shimmer.setRepeatCount(0)
-//                .setDuration(500)
-//                .setStartDelay(300)
-//                .setDirection(Shimmer.ANIMATION_DIRECTION_RTL)
-//                .setAnimatorListener(new Animator.AnimatorListener(){
-//
-//                    @Override
-//                    public void onAnimationStart(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationCancel(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animator animation) {
-//
-//                    }
-//                });
-        ImageView tv = (ImageView) view.findViewById(R.id.iv_wifi);
+
         int[] res = {R.drawable.cehua1, R.drawable.cehua3, R.drawable.cehua};
 
         iv_menu.setOnClickListener(this);

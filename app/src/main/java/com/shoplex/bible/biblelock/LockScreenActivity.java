@@ -3,7 +3,6 @@ package com.shoplex.bible.biblelock;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -76,16 +75,13 @@ public class LockScreenActivity extends SwipeBackActivity {
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int key = event.getKeyCode();
-        Log.i(TAG,"back key = " + key);
 
         switch (key) {
             case KeyEvent.KEYCODE_BACK: {
-                Log.i(TAG,"back");
 
                 return true;
             }
             case KeyEvent.KEYCODE_MENU:{
-                Log.i(TAG,"menu");
                 return true;
             }
         }
@@ -98,7 +94,6 @@ public class LockScreenActivity extends SwipeBackActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.i(TAG," yuyao onTouchEvent");
         return super.onTouchEvent(event);
     }
 
@@ -137,7 +132,6 @@ public class LockScreenActivity extends SwipeBackActivity {
             View rootView = view.initView();
             view.initFragment();
             container.addView(rootView);
-            Log.i(TAG,"yuyao instantiateitem");
             return rootView;
         }
 

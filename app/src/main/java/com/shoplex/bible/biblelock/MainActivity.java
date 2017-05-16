@@ -171,7 +171,7 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
             @Override
             public void onError(Ad ad, AdError error) {
                 // Ad error callback
-
+                AdError error1 = error;
                 Log.i(TAG,"onError onError " + error.toString());
 
             }
@@ -363,7 +363,7 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
             }
 
             showPopwindow(view, Gravity.BOTTOM);
-            showNativeAd(view);
+//            showNativeAd(view);
 
             viewById.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -398,17 +398,17 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
         PopupWindow window = new PopupWindow(view,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 //        window.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
 //        window.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        backgroundAlpha(0.5f);
+//        backgroundAlpha(0.4f);
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         window.setFocusable(true);
 
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);
-
+//        window.setBackgroundDrawable(new BitmapDrawable());
 
         // 设置popWindow的显示和消失动画
-        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        window.setAnimationStyle(R.style.mypopwindow_anim_style);
         // 在底部显示
         window.showAtLocation(view,
                 gravity, 0, 0);
@@ -437,7 +437,7 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
         PopupWindow window = new PopupWindow(view);
         window.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         window.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        backgroundAlpha(0.5f);
+//        backgroundAlpha(0.5f);
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         window.setFocusable(true);
 
@@ -467,31 +467,17 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
      * 显示 评论的popupWindow
      */
     private View showRateUsPopwindow(int layout, int gravity) {
-        // 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layout, null);
-
-        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
-
         PopupWindow window = new PopupWindow(view);
-        window.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-        window.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        backgroundAlpha(0.5f);
-        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        window.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         window.setFocusable(true);
-
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);
-
-
-        // 设置popWindow的显示和消失动画
-        window.setAnimationStyle(R.style.mypopwindow_anim_style);
-        // 在底部显示
         window.showAtLocation(view,
                 gravity, 0, 0);
-
-        //popWindow消失监听方法
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
             @Override
@@ -509,9 +495,9 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
      * @param bgAlpha
      */
     public void backgroundAlpha(float bgAlpha) {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        WindowManager.LayoutParams lp = this.getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0
-        getWindow().setAttributes(lp);
+        this.getWindow().setAttributes(lp);
     }
 }
 

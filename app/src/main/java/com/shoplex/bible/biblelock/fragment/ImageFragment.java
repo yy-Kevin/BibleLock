@@ -37,7 +37,8 @@ import rx.schedulers.Schedulers;
  */
 
 public class ImageFragment extends Fragment {
-
+    private static final String TGA = "ImageFragment";
+    private long lastClickTime = 0;
     public static final String TAG ="ImageFragment" ;
     private ListView lv_fragment_image;
     private SwipeRefreshLayout mSwipeRefresh;
@@ -75,6 +76,8 @@ public class ImageFragment extends Fragment {
         lv_fragment_image.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Log.i(TGA,"yuyao  position = " + position);
                 if (position%2 == 0){
                     Intent intent = new Intent(mActivity, ImageCommentActivity.class);
                     intent.putExtra("",position);

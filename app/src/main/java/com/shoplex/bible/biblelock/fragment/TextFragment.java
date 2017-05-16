@@ -26,9 +26,11 @@ import com.shoplex.bible.biblelock.R;
 import com.shoplex.bible.biblelock.TextCommentActivity;
 import com.shoplex.bible.biblelock.adapter.TextFragmentAdapter;
 import com.shoplex.bible.biblelock.bean.Comment;
+import com.shoplex.bible.biblelock.location.LoactionUrl;
 import com.shoplex.bible.biblelock.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static com.shoplex.bible.biblelock.server.ServiceActivity.TAG;
 
@@ -38,7 +40,7 @@ import static com.shoplex.bible.biblelock.server.ServiceActivity.TAG;
 
 public class TextFragment extends Fragment implements View.OnClickListener {
 
-
+    private long lastClickTime = 0;
     private ListView lv_fragment_text;
     private EditText editText;
     private RelativeLayout relativeLayout;
@@ -121,22 +123,20 @@ public class TextFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
-        textAdapter.setOnclicListener(new TextFragmentAdapter.onClickListener() {
-            @Override
-            public void onItemClick(int postition) {
-                Log.i(TAG, "like like");
-
-            }
-        });
-
         lv_fragment_text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public static final String TGA = "setOnItemClickListener";
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                long currentTime = Calendar.getInstance().getTimeInMillis();
+                Log.i(TGA,"yuyao  position = " + position);
+                if (currentTime -lastClickTime > LoactionUrl.MIN_CLICK_DELAY_TIME && (position + 1) % 3 != 0){
+                    lastClickTime = currentTime;
+                    Intent intent = new Intent(mActivity, TextCommentActivity.class);
+                    intent.putExtra("postition" ,position);
+                    mActivity.startActivityForResult(intent,0);
+                }
 
-                Intent intent = new Intent(mActivity, TextCommentActivity.class);
-                intent.putExtra("postition" ,position);
-                mActivity.startActivityForResult(intent,0);
             }
         });
 

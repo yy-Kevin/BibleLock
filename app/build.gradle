@@ -34,7 +34,7 @@ dependencies {
     //水波纹效果
     compile 'com.romainpiel.shimmer:library:1.4.0@aar'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'cn.bingoogolapple:bga-swipebacklayout:1.0.8'
+//    compile 'cn.bingoogolapple:bga-swipebacklayout:1.0.8'
     compile 'com.android.support:appcompat-v7:24.2.0'
     //屏幕适配
     compile 'com.zhy:autolayout:1.4.5'
