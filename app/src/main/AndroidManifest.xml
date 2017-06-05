@@ -6,6 +6,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BATTERY_STATS" />
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <!--保存资源到SD卡-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -42,8 +50,24 @@
             android:launchMode="singleInstance"
             android:taskAffinity="com.example.suoping.lockscreen"></activity>
 
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
         <service android:name=".server.ServiceActivity" />
         <!--<receiver android:name=".server.BatteryBroadcastReciver"/>-->
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
         <meta-data
             android:name="design_width"
             android:value="1080"></meta-data>

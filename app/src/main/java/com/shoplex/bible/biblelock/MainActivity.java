@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -47,6 +48,7 @@ import com.shoplex.bible.biblelock.fragment.TextFragment;
 import com.shoplex.bible.biblelock.server.ServiceActivity;
 import com.shoplex.bible.biblelock.utils.SharedPreferencesUtils;
 import com.shoplex.bible.biblelock.utils.ToastUtil;
+import com.tencent.bugly.Bugly;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.ArrayList;
@@ -71,13 +73,15 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         initView();
-
         if (savedInstanceState == null) {
             initFragment();
         }
+        startScreenLock();
+        initSetting();
+    }
 
+    private void startScreenLock(){
         //判断是否开启锁屏服务
         intent = new Intent(MainActivity.this, ServiceActivity.class);
         boolean isChecked = (boolean) SharedPreferencesUtils.get(MainActivity.this, "isChecked", false);
@@ -86,20 +90,17 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
         } else {
             stopService(intent);
         }
-
-
+    }
+    private void initSetting(){
         binding.btvImage.setOnClickListener(this);
         binding.btvText.setOnClickListener(this);
         ib_toolbar.setOnClickListener(this);
         startAnimation(ib_toolbar);
-
         binding.btvImage.setSelected(true);
         binding.btvText.setSelected(false);
     }
-
-
     private void initView() {
-//        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         toolbar = (Toolbar) this.findViewById(R.id.toolbar);
         ib_toolbar = (ImageView) toolbar.findViewById(R.id.ib_toolbar);
         setSupportActionBar(toolbar);
@@ -111,14 +112,9 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
         actionBar.setTitle("");
         // 通过代码的方式 给三个小点 换图标
         toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.menu_icon));
-//
-//        //初始化抽屉布局
-//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
-//        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.drawer_open, R.string.drawer_close);
-//        mDrawerToggle.syncState();
-//        mDrawerLayout.setDrawerListener(mDrawerToggle);
-    }
 
+        Bugly.init(getApplicationContext(), "94379a7949", false);
+    }
     private void initFragment() {
         imageFragment = new ImageFragment();
         getFragmentManager().beginTransaction().replace(R.id.fl_content, imageFragment).commit();
@@ -162,7 +158,6 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
     }
     public void showNativeAd(final View view) {
         Log.i(TAG,"1848266248745233  ");
-
         nativeAd = new NativeAd(this, "YOUR_PLACEMENT_ID");
         nativeAd.loadAd();
 
@@ -271,7 +266,6 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_settings, menu);
-        //怎么改啊 nilai
 
         return true;
     }
@@ -295,7 +289,6 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
                         SharedPreferencesUtils.put(MainActivity.this, "RATING", rating);
                     }
                 });
-
                 break;
 
             // 反馈信息
@@ -469,10 +462,17 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
     private View showRateUsPopwindow(int layout, int gravity) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layout, null);
-        PopupWindow window = new PopupWindow(view);
+        final PopupWindow window = new PopupWindow(view);
         window.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         window.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         window.setFocusable(true);
+        RelativeLayout rl_ratingbar = (RelativeLayout) view.findViewById(R.id.rl_ratingbar);
+        rl_ratingbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+            }
+        });
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);

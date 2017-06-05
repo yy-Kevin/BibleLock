@@ -1,57 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_ratingbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#36000000"
     android:orientation="vertical">
 
     <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
         android:layout_marginTop="40dp"
+        android:background="@mipmap/close"
         android:paddingRight="10dp"
-        android:paddingTop="10dp"
+        android:paddingTop="10dp" />
+
+    <com.shoplex.bible.biblelock.view.ADLinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/close"/>
-
-    <LinearLayout
         android:layout_centerInParent="true"
-        android:orientation="vertical"
         android:background="#fff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <RatingBar
-        android:layout_gravity="center"
-        android:id="@+id/ratingbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:rating="0"
-        android:progressTint="#ffd71b"
-        android:stepSize="1" />
-    
-    <TextView
-        android:layout_marginTop="6dp"
-        android:textSize="16dp"
-        android:text="Do you really like us? "
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:orientation="vertical">
 
-    <TextView
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="8dp"
-        android:singleLine="true"
-        android:textSize="16dp"
-        android:text="please give five points, we will try to do better!"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:ellipsize="marquee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <RatingBar
+            android:id="@+id/ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:numStars="5"
+            android:progressTint="#ffd71b"
+            android:rating="0"
+            android:stepSize="1" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="Do you really like us? "
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:text="please give five points, we will try to do better!"
+            android:textSize="16dp" />
+
+    </com.shoplex.bible.biblelock.view.ADLinearLayout>
 </RelativeLayout>

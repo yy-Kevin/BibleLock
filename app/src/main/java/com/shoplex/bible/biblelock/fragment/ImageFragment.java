@@ -109,6 +109,7 @@ public class ImageFragment extends Fragment {
                         // 停止刷新
 
                         mSwipeRefresh.setRefreshing(false);
+
                     }
                 }, 3000);
             }
